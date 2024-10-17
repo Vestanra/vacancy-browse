@@ -2,35 +2,31 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AccountRole } from "../interfaces-submodule/enums/account/account-role.enum";
 import { AccountStatus } from "../interfaces-submodule/enums/account/account-status.enum";
 import { AccountTypeAuth } from "../interfaces-submodule/enums/account/account-type-auth.enum";
-import { ILoginResponseDTO } from "../interfaces-submodule/interfaces/dto/auth/ilogin-response.interfaces";
 import { logIn, refreshUser } from "./operationsAuth";
+import { IAccountDTO } from "../interfaces-submodule/interfaces/dto/account/iaccount.interface";
 
-const initialAccount: ILoginResponseDTO = {
-    access: {
-        accessToken: "",
-        refreshToken: "",
-    },
-    account: {
-        id: 0,
-        email: "",
-        firstName: "",
-        lastName: "",
-        status: AccountStatus.Invited,
-        typeAuth: AccountTypeAuth.LOCAL,
-        accountRole: AccountRole.User,
-    },
+const userData: IAccountDTO = {
+    id: 0,
+    email: "",
+    firstName: "",
+    lastName: "",
+    status: AccountStatus.Invited,
+    typeAuth: AccountTypeAuth.LOCAL,
+    accountRole: AccountRole.User,
 };
 
 export interface AuthState {
-    loginData: ILoginResponseDTO;
+    loginData: IAccountDTO;
     refreshToken: string;
+    accessToken: string,
     loading: boolean;
     error: null | string | undefined;
 }
 
 const initialState: AuthState = {
-    loginData: initialAccount,
+    loginData: userData,
     refreshToken: "",
+    accessToken: "",
     loading: false,
     error: null,
 };
@@ -39,9 +35,10 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        logout: (state) => {
-            state.loginData = initialAccount;
+        logOut: (state) => {
+            state.loginData = userData;
             state.refreshToken = "";
+            state.accessToken = "";
             state.loading = false;
             state.error = null;
         }
@@ -49,9 +46,9 @@ const authSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(logIn.fulfilled, (state, action) => {
-                state.loginData.access = action.payload.access;
-                state.loginData.account = action.payload.account;
+                state.loginData = action.payload.account;
                 state.refreshToken = action.payload.access.refreshToken;
+                state.accessToken = action.payload.access.accessToken;
                 state.loading = false;
                 state.error = null;
             })
@@ -64,9 +61,9 @@ const authSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(refreshUser.fulfilled, (state, action) => {
-                state.loginData.access = action.payload.access;
-                state.loginData.account = action.payload.account;
+                state.loginData = action.payload.account;
                 state.refreshToken = action.payload.access.refreshToken;
+                state.accessToken = action.payload.access.accessToken;
                 state.loading = false;
                 state.error = null;
             })
@@ -81,4 +78,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { logout } = authSlice.actions;
+export const { logOut } = authSlice.actions;

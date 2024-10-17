@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../redux/helpers"
+import { useAppDispatch } from "../redux/store"
 import { refreshUser } from "../redux/operationsAuth";
 
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
@@ -13,8 +13,8 @@ export const RefreshUser = ({ children }: { children: JSX.Element }) => {
             setIsRefreshing(false)
         }
         refresh()
-        
+
     }, [dispatch])
-    
+
     return isRefreshing ?  <div>Loading...</div> : children;
 }

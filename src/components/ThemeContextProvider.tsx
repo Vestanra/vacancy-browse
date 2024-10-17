@@ -5,7 +5,8 @@ import frameLight from "../images/png/frame-light.png";
 import frameDark from "../images/png/frame-dark.png";
 
 interface CustomPaletteOptions extends PaletteOptions {
-    blue?: {
+  blue?: {
+      B100?: string;
       BA300?: string;
   },
   
@@ -52,6 +53,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               dark: '#131314',
             },
             blue: {
+              B100: '#F0F5FF',
               BA300: '#ABBDE0',
             },
             gray: {
@@ -74,6 +76,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               dark: '#FFFFFF',
             },
             blue: {
+              B100: '#181B29FF',
               BA300: '#3760AD',
             },
             gray: {

@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAppSelector, selectAccessToken  } from "../redux/helpers"
+import { useAppSelector, selectAccessToken  } from "../redux/selectors"
 
 export const PrivateRoute = ({ children }: {children: JSX.Element}) => {
     const accessToken = useAppSelector(selectAccessToken);

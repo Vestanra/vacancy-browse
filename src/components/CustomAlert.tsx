@@ -11,6 +11,7 @@ interface CustomAlertProps {
 
 export const CustomAlert: React.FC<CustomAlertProps> = ({ severity, children, sx }) => {
     const theme: any = useTheme();
+    
     return (
         <Alert
             severity={severity}
