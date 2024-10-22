@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { Login } from "../components/Login"
-import { selectAccessToken, useAppSelector } from "../redux/selectors";
+import { selectUserData, useAppSelector } from "../redux/selectors";
 
 export const LogInPade = () => {
-    const accessToken = useAppSelector(selectAccessToken);
-    if (accessToken) {
+    const { email } = useAppSelector(selectUserData);
+    if (email) {
         return <Navigate to={"/"} replace/>
     }
     

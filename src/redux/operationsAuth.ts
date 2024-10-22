@@ -3,12 +3,14 @@ import { ILoginRequestDTO } from "../interfaces-submodule/interfaces/dto/auth/ia
 import { ILoginResponseDTO } from "../interfaces-submodule/interfaces/dto/auth/ilogin-response.interfaces";
 import { RootState } from "./store";
 import { logInRequest, refreshTokenRequest } from "../apiService";
+import { getRefreshToken } from "../components/hooks/getTokens";
 
-export const logIn = createAsyncThunk<ILoginResponseDTO, ILoginRequestDTO, { rejectValue: string}>(
+export const logIn = createAsyncThunk<ILoginResponseDTO, ILoginRequestDTO, { rejectValue: string }>(
     "auth/login",
     async (credentials: ILoginRequestDTO, thunkAPI) => {
         try {
             const data = await logInRequest(credentials);
+            localStorage.setItem('token', JSON.stringify(data.access));
             return data;
         } catch (error: any) {
             return thunkAPI.rejectWithValue(error.message)
@@ -19,13 +21,13 @@ export const logIn = createAsyncThunk<ILoginResponseDTO, ILoginRequestDTO, { rej
 export const refreshUser = createAsyncThunk<any, void, { state: RootState, rejectValue: string  }>(
     "auth/refresh",
     async (_: void, thunkAPI) => {
-        const state = thunkAPI.getState();
-        const token = state.auth.refreshToken;
-        if (token === null || token === "") {
+        const refreshToken = getRefreshToken();
+        if (refreshToken === null) {
             return thunkAPI.rejectWithValue('Unable to fetch user');
         };
         try {
-            const data = await refreshTokenRequest( token );
+            const data = await refreshTokenRequest(refreshToken);
+            localStorage.setItem('token', JSON.stringify(data.access));
             return data
         } catch (error: any) {
             return thunkAPI.rejectWithValue(error.message)

@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
-import { useAppSelector, selectAccessToken  } from "../redux/selectors"
+import { useAppSelector, selectUserData  } from "../redux/selectors"
 
-export const PrivateRoute = ({ children }: {children: JSX.Element}) => {
-    const accessToken = useAppSelector(selectAccessToken);
+export const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+    const { email } = useAppSelector(selectUserData);
     
-    return accessToken ? children : <Navigate to="/login" replace/>
+    return email ? children : <Navigate to="/login" replace/>
 }

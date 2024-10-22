@@ -3,8 +3,6 @@ import { RootState } from "./store";
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const selectUserData = (state: RootState) => state.auth.userData;
-export const selectAccessToken = (state: RootState) => state.auth.accessToken;
-export const selectRefreshToken = (state: RootState) => state.auth.refreshToken;
+export const selectUserData = (state: RootState) => state.auth.loginData;
 export const selectError = (state: RootState) => state.auth.error;
 export const selectLoading = (state: RootState) => state.auth.loading;

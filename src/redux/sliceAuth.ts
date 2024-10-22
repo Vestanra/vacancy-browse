@@ -17,16 +17,12 @@ const userData: IAccountDTO = {
 
 export interface AuthState {
     loginData: IAccountDTO;
-    refreshToken: string;
-    accessToken: string,
     loading: boolean;
     error: null | string | undefined;
 }
 
 const initialState: AuthState = {
     loginData: userData,
-    refreshToken: "",
-    accessToken: "",
     loading: false,
     error: null,
 };
@@ -37,8 +33,6 @@ const authSlice = createSlice({
     reducers: {
         logOut: (state) => {
             state.loginData = userData;
-            state.refreshToken = "";
-            state.accessToken = "";
             state.loading = false;
             state.error = null;
         }
@@ -47,8 +41,6 @@ const authSlice = createSlice({
         builder
             .addCase(logIn.fulfilled, (state, action) => {
                 state.loginData = action.payload.account;
-                state.refreshToken = action.payload.access.refreshToken;
-                state.accessToken = action.payload.access.accessToken;
                 state.loading = false;
                 state.error = null;
             })
@@ -62,8 +54,6 @@ const authSlice = createSlice({
             })
             .addCase(refreshUser.fulfilled, (state, action) => {
                 state.loginData = action.payload.account;
-                state.refreshToken = action.payload.access.refreshToken;
-                state.accessToken = action.payload.access.accessToken;
                 state.loading = false;
                 state.error = null;
             })

@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { persistor, store } from './redux/store';
+import { store } from './redux/store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LogInPade } from './pages/LogInPage';
 import { PrivateRoute } from './components/PrivateRoute';
-import { PersistGate } from 'redux-persist/es/integration/react';
 import { RefreshUser } from './components/RefreshUser';
 import { ThemeContextProvider } from './components/ThemeContextProvider';
 
@@ -23,28 +22,26 @@ const router = createBrowserRouter([
     element: <LogInPade />
   },
   {
-    path: "/",
+    path: "/feeds",
     element: <PrivateRoute children={<HomePage /> }/>
   },
   {
     path: "*",
-    element: <Navigate to="/" replace/>,
+    element: <Navigate to="/feeds" replace/>,
   }
 ])
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <QueryClientProvider client={queryClient}>
-          <RefreshUser>
-            <ThemeContextProvider>
-              <RouterProvider router={router} />
-            </ThemeContextProvider>
-          </RefreshUser>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </PersistGate>
+      <QueryClientProvider client={queryClient}>
+        <RefreshUser>
+          <ThemeContextProvider>
+            <RouterProvider router={router} />
+          </ThemeContextProvider>
+        </RefreshUser>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 );

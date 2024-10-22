@@ -1,4 +1,4 @@
-import { logIn } from "../../redux/operationsAuth";
+import { logIn, refreshUser } from "../../redux/operationsAuth";
 import { logOut } from "../../redux/sliceAuth";
 import { useAppDispatch } from "../../redux/store";
 
@@ -13,8 +13,13 @@ export const useAuth = () => {
         dispatch(logOut())
     };
 
+    const refresh = async () => {
+        await dispatch(refreshUser())
+    }
+
     return {
         login,
         logout,
+        refresh,
     };
 };

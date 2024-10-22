@@ -2,6 +2,8 @@ import axios from "axios";
 import { ILoginRequestDTO } from "./interfaces-submodule/interfaces/dto/auth/iadmin-login-request.interface";
 import { BaseRoutes } from "./interfaces-submodule/enums/routes/base-routes.enum";
 import { AuthRoutes } from "./interfaces-submodule/enums/routes/auth-routes.enum";
+import { UpworkFeedsRoutesEnum } from "./interfaces-submodule/enums/routes/upwork-feeds-routes.enum";
+import { IUpworkResponseListFeedsDto } from "./interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
 
 const api = axios.create({
     baseURL: 'https://trainee-api.chat.abcloudz.com',
@@ -11,15 +13,37 @@ const api = axios.create({
 });
 
 export const logInRequest = async (credentials: ILoginRequestDTO) => {
-    const logInUrl = `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.Login}`;
-    const response = await api.post(logInUrl, credentials);
+    const url = `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.Login}`;
+    const response = await api.post(url, credentials);
     return response.data.data;
 };
 
 export const refreshTokenRequest = async (token: string) => {
-    const refreshUrl = `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.RefreshToken}`;
-    const response = await api.put(refreshUrl, { token });
+    const url = `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.RefreshToken}`;
+    const response = await api.put(url, { token });
     return response.data.data;
 };
 
+const defaultParams = {
+                pageSize: 10,
+                pageNumber: 1,
+                sortDirection: "asc",
+                sortBy: "title"
+            }
+
+export const getFeeds = async (token: string, params = {}): Promise<IUpworkResponseListFeedsDto | void> => {
+    const url = `${BaseRoutes.V1}/${UpworkFeedsRoutesEnum.BasePrefix}/${UpworkFeedsRoutesEnum.GetFeeds}`;
+    try {
+        const response = await api.post(url,
+            {...defaultParams, ...params},
+            {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+        return response.data.data;
+    } catch (error) {
+        throw (error)
+    }
+};
 

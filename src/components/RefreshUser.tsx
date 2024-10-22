@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch } from "../redux/store"
 import { refreshUser } from "../redux/operationsAuth";
+import { selectLoading, useAppSelector } from "../redux/selectors";
 
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
-    const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+    const isLoading = useAppSelector(selectLoading)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const refresh = async () => {
-            setIsRefreshing(true);
-            await dispatch(refreshUser());
-            setIsRefreshing(false)
+        const refresh = () => {
+            dispatch(refreshUser());
         }
         refresh()
 
     }, [dispatch])
 
-    return isRefreshing ?  <div>Loading...</div> : children;
+    return isLoading ?  <div>Loading...</div> : children;
 }

@@ -1,3 +1,4 @@
+import { Feeds } from "../components/Feeds";
 import { useAuth } from "../components/hooks/useAuth";
 import { useThemeContext } from "../components/ThemeContextProvider";
 
@@ -14,6 +15,7 @@ export const HomePage = () => {
             <button onClick={() => logout()}>logout</button>
             <div>thema: { themeMode }</div>
             <button onClick={toggleTheme}>toggle theme</button>
+            <Feeds/>
         </div>        
     )
 };
