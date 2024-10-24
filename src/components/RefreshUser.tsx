@@ -6,9 +6,12 @@ import { selectLoading, useAppSelector } from "../redux/selectors";
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
     const isLoading = useAppSelector(selectLoading)
     const dispatch = useAppDispatch();
+    
+    
 
     useEffect(() => {
         const refresh = () => {
+            console.log("Attempting to refresh user...");
             dispatch(refreshUser());
         }
         refresh()

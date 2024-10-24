@@ -32,7 +32,7 @@ const router = createBrowserRouter([
 ])
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <RefreshUser>
@@ -43,5 +43,5 @@ root.render(
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

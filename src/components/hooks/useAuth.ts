@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { logIn, refreshUser } from "../../redux/operationsAuth";
 import { logOut } from "../../redux/sliceAuth";
 import { useAppDispatch } from "../../redux/store";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const login = ({ email, password }: { email: string, password: string }) => {
         dispatch(logIn({ email, password }));
@@ -11,10 +13,11 @@ export const useAuth = () => {
 
     const logout = () => {
         dispatch(logOut())
+        navigate("/login");
     };
 
-    const refresh = async () => {
-        await dispatch(refreshUser())
+    const refresh = () => {
+        dispatch(()=>refreshUser())
     }
 
     return {

@@ -24,12 +24,33 @@ export const refreshTokenRequest = async (token: string) => {
     return response.data.data;
 };
 
+export enum UpworkFeedSortBy {
+  Title = "title",
+  Published = "published",
+  Score = "score",
+  Review = "review"
+}
+
+export enum UpworkFeedSearchBy {
+  Title = "title",
+  Published = "published",
+  Keywords = "keywords",
+  Score = "score",
+  Review = "review"
+}
+
 const defaultParams = {
-                pageSize: 10,
-                pageNumber: 1,
-                sortDirection: "asc",
-                sortBy: "title"
-            }
+    pageSize: 20,
+    pageNumber: 1,
+    sortDirection: "desc",
+    "searchParameters": [
+        {
+            "searchQuery":  ["developer"],
+            "searchBy": "keywords"
+        }
+    ],
+    // sortBy: "published"
+};
 
 export const getFeeds = async (token: string, params = {}): Promise<IUpworkResponseListFeedsDto | void> => {
     const url = `${BaseRoutes.V1}/${UpworkFeedsRoutesEnum.BasePrefix}/${UpworkFeedsRoutesEnum.GetFeeds}`;

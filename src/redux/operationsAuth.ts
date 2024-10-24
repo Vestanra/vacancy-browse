@@ -27,6 +27,7 @@ export const refreshUser = createAsyncThunk<any, void, { state: RootState, rejec
         };
         try {
             const data = await refreshTokenRequest(refreshToken);
+            console.log(data.access)
             localStorage.setItem('token', JSON.stringify(data.access));
             return data
         } catch (error: any) {

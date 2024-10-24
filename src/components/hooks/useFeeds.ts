@@ -1,25 +1,30 @@
 import { getFeeds } from "../../apiService";
-import { refreshUser } from "../../redux/operationsAuth";
-import { logOut } from "../../redux/sliceAuth";
-import { useAppDispatch } from "../../redux/store";
-import { getAccessToken } from "./getTokens";
+import { getAccessToken, getRefreshToken } from "./getTokens";
+import { useAuth } from "./useAuth";
 
 export const useFeeds = () => {
-    const dispatch = useAppDispatch();
+    const { logout, refresh } = useAuth();
+
     const allFeeds = async (params = {}) => {
-        try {
-            return await getFeeds(getAccessToken(), params);
+        let accessToken = getAccessToken();
+        try {        
+            const data = await getFeeds(accessToken, params);
+            return data
         } catch (error: any) {
             if (error.status === 401) {
-                console.log('before refresh')
-                await dispatch(refreshUser())
-                return await getFeeds(getAccessToken(), params)
-            } else if (error.status === 403) {
-                console.log('before logout')
-                logOut()
+                const refreshToken = getRefreshToken();
+                if (!refreshToken) {
+                    logout();
+                    return;
+                };          
+                refresh();
+                accessToken = getAccessToken();
+                return await getFeeds(accessToken, params);
+            } else if (error.status === 401) {
+                 logout();
             } else {
                 console.log("Something went wrong")
-            }            
+            }          
         };
     };
 

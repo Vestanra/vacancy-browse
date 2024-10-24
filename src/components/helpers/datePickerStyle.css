@@ -1,0 +1,47 @@
+.custom-datepicker {
+    background-color: #ffffff;
+    /* Білий фон для DatePicker */
+    border: 1px solid #D5D7DB;
+    /* Рамка */
+    padding: 10px;
+    /* Відступи */
+    border-radius: 4px;
+    /* Заокруглення */
+    font-family: 'Poppins', sans-serif;
+    /* Шрифт */
+}
+
+/* .custom-calendar {
+    background-color: #ffffff;
+} */
+
+.custom-calendar .react-datepicker__header {
+    background-color: #ffffff;
+    /* Сірий фон для шапки календаря */
+    border-bottom: 1px solid #D5D7DB;
+    /* Рамка знизу */
+}
+
+.custom-calendar .react-datepicker__day {
+    color: #333;
+    /* Колір тексту днів */
+}
+
+.custom-calendar .react-datepicker__day--in-range {
+    border: 1px solid #ABBDE0;
+    background-color: #ffffff;
+}
+
+.custom-calendar .react-datepicker__day:hover {
+    border: 1px solid #ABBDE0;
+        /* Колір рамки для вибраного дня */
+        background-color: #ffffff;
+        /* Фон для вибраного дня */
+}
+
+.custom-calendar .react-datepicker__day--selected {
+    border: 1px solid #ABBDE0;
+    /* Колір рамки для вибраного дня */
+    background-color: #ffffff;
+    /* Фон для вибраного дня */
+}
