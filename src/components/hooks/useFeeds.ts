@@ -1,32 +1,22 @@
-import { getFeeds } from "../../apiService";
-import { getAccessToken, getRefreshToken } from "./getTokens";
-import { useAuth } from "./useAuth";
+import { getFeeds } from "../../apiService"
+import { refreshUser } from "../../redux/operationsAuth";
+import { useAppDispatch } from "../../redux/store";
 
 export const useFeeds = () => {
-    const { logout, refresh } = useAuth();
-
-    const allFeeds = async (params = {}) => {
-        let accessToken = getAccessToken();
-        try {        
-            const data = await getFeeds(accessToken, params);
-            return data
+    const dispatch = useAppDispatch();
+    const getAllFeeds = async (params: {}) => {
+        try {
+            const result = await getFeeds(params);
+            return result;
         } catch (error: any) {
+            console.log(error.status)
             if (error.status === 401) {
-                const refreshToken = getRefreshToken();
-                if (!refreshToken) {
-                    logout();
-                    return;
-                };          
-                refresh();
-                accessToken = getAccessToken();
-                return await getFeeds(accessToken, params);
-            } else if (error.status === 401) {
-                 logout();
-            } else {
-                console.log("Something went wrong")
-            }          
-        };
-    };
-
-    return allFeeds;
+                const refreshResult = await dispatch(refreshUser()).unwrap()
+                if (!refreshResult) return;
+                const result = await getFeeds(params);
+                return result;
+            }
+        }
+    }
+    return getAllFeeds
 };

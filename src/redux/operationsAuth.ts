@@ -27,12 +27,23 @@ export const refreshUser = createAsyncThunk<any, void, { state: RootState, rejec
         };
         try {
             const data = await refreshTokenRequest(refreshToken);
-            console.log(data.access)
             localStorage.setItem('token', JSON.stringify(data.access));
             return data
         } catch (error: any) {
+            console.log("error refresh")
+            localStorage.clear();
             return thunkAPI.rejectWithValue(error.message)
         }
     }
 );
 
+export const logOut = createAsyncThunk<void, void, { state: RootState }>(
+    "auth/logOut",
+    async (_: void, thunkAPI) => {
+        try {
+            localStorage.clear();
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.message)
+        }
+    }
+);

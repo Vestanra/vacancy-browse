@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import frameLight from "../images/png/frame-light.png";
 import frameDark from "../images/png/frame-dark.png";
 
-interface CustomPaletteOptions extends PaletteOptions {
+export interface CustomPaletteOptions extends PaletteOptions {
   blue?: {
       B100?: string;
       BA300?: string;
@@ -14,6 +14,7 @@ interface CustomPaletteOptions extends PaletteOptions {
       G300?: string;
       G400?: string;
       G600?: string;
+      G700?: string;
       G800?: string;
   },
   alertError?: {
@@ -51,6 +52,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               light: '#FFFFFF',
               main: '#FFFFFF',
               dark: '#131314',
+              contrastText: '#0F62FE',
             },
             blue: {
               B100: '#F0F5FF',
@@ -60,6 +62,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               G300: '#D5D7DB',
               G400: '#B0B3B8',
               G600: '#70737A',
+              G700: '#4D4D4D',
               G800: '#252733',
             },
             alertError: {
@@ -74,6 +77,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               light: '#FFFFFF',
               main: '#131314',
               dark: '#FFFFFF',
+              contrastText: '#5B94FE',
             },
             blue: {
               B100: '#181B29FF',
@@ -83,6 +87,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               G300: '#414752',
               G400: '#70737A',
               G600: '#B0B3B8',
+              G700: '#C9CED6',
               G800: '#EBECF0',
             },
             alertError: {

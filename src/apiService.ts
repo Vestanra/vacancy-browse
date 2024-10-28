@@ -4,6 +4,7 @@ import { BaseRoutes } from "./interfaces-submodule/enums/routes/base-routes.enum
 import { AuthRoutes } from "./interfaces-submodule/enums/routes/auth-routes.enum";
 import { UpworkFeedsRoutesEnum } from "./interfaces-submodule/enums/routes/upwork-feeds-routes.enum";
 import { IUpworkResponseListFeedsDto } from "./interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
+import { getAccessToken } from "./components/hooks/getTokens";
 
 const api = axios.create({
     baseURL: 'https://trainee-api.chat.abcloudz.com',
@@ -24,47 +25,17 @@ export const refreshTokenRequest = async (token: string) => {
     return response.data.data;
 };
 
-export enum UpworkFeedSortBy {
-  Title = "title",
-  Published = "published",
-  Score = "score",
-  Review = "review"
-}
-
-export enum UpworkFeedSearchBy {
-  Title = "title",
-  Published = "published",
-  Keywords = "keywords",
-  Score = "score",
-  Review = "review"
-}
-
-const defaultParams = {
-    pageSize: 20,
-    pageNumber: 1,
-    sortDirection: "desc",
-    "searchParameters": [
-        {
-            "searchQuery":  ["developer"],
-            "searchBy": "keywords"
-        }
-    ],
-    // sortBy: "published"
-};
-
-export const getFeeds = async (token: string, params = {}): Promise<IUpworkResponseListFeedsDto | void> => {
+export const getFeeds = async (params: {}): Promise<IUpworkResponseListFeedsDto | void> => {
     const url = `${BaseRoutes.V1}/${UpworkFeedsRoutesEnum.BasePrefix}/${UpworkFeedsRoutesEnum.GetFeeds}`;
-    try {
-        const response = await api.post(url,
-            {...defaultParams, ...params},
-            {
+    let accessToken = getAccessToken();
+    const response = await api.post(
+        url,
+        params,
+        {
             headers: {
-                'Authorization': `Bearer ${token}`,
-            }
-        });
-        return response.data.data;
-    } catch (error) {
-        throw (error)
-    }
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+    return response.data.data;
 };
-
