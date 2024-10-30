@@ -1,39 +1,31 @@
 import Select, { GroupBase, components  } from "react-select";
-import { UpworkFeedSearchBy } from "../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
-import { KeywordOption, KeywordSelectProps } from "./types";
-import { formattedKeywords } from "./helpers/functions/formattedKeywords";
-import { useEffect, useState } from "react";
-import { calculateKeyWords } from "./helpers/functions/calculateKeyWords";
+import { KeywordOption, ReviewSelectProps, } from "../helpers/types";
+import { displayValue, formattedKeywords } from "../helpers/functions/selectFunctions";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
-import sprite from "../images/svg/sprite.svg";
+import sprite from "../../images/svg/sprite.svg";
+import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
 
-export const KeywordSelect: React.FC<KeywordSelectProps> = ({ setParams, feedsData, selectedValue, setSelectedValue }) => {
+export const ReviewSelect: React.FC<ReviewSelectProps> = ({ setParams, setSelectedScore, setSelectedKeyWords, setSelectedTitle, selectedReview, setSelectedReview, setCurrentPage }) => {
 
-    const [keyWords, setKeyWords] = useState<string[]>([]);
-    const theme: any = useTheme();
-
-    const displayValue = () => {
-        if (selectedValue.length === 0 || selectedValue.length === keyWords.length) return "ALL";
-        if (selectedValue.length === 1) return selectedValue[0];
-        return `${selectedValue.length} selected`;
-    };
-
-    useEffect(() => {
-        if (feedsData.length > 0) {
-            const newKeyWords = calculateKeyWords(feedsData);
-            setKeyWords(newKeyWords);
-        }
-    }, [feedsData]);
+    const theme: any = useTheme();    
+    const initialValue = ["Like", "Dislike"];
 
     const customStyles = {
-        control: (provided: any) => ({
+        control: (provided: any, state: any) => ({
             ...provided,
+            height: '44px',
             color: theme.palette.primary.dark,
-            backgroundColor: theme.palette.primary.main, 
-            padding: "12px",  
+            backgroundColor: theme.palette.primary.main,
+            padding: "0",
+            paddingRight: "12px",
             fontSize: "14px",
             fontWeight: '400',
+            border: `1px solid ${state.isFocused ? theme.palette.primary.contrastText : theme.palette.gray.G400}`,
+            boxShadow: state.isFocused && 'none',
+            '&:hover': {
+                border: `1px solid ${theme.palette.primary.contrastText}`,
+            },
         }),
         menu: (provided: any) => ({
             ...provided,
@@ -41,14 +33,28 @@ export const KeywordSelect: React.FC<KeywordSelectProps> = ({ setParams, feedsDa
             backgroundColor: theme.palette.primary.main,
             fontSize: "14px",
             fontWeight: '500',
+            padding: 0,
+        }),
+        dropdownIndicator: (provided: any) => ({
+            ...provided,
+            padding: 0,
+        }),
+        placeholder: (provided: any) => ({
+            ...provided,
+            color: theme.palette.primary.dark,
+            fontSize: "14px",
+            fontWeight: "400",
+            padding: "0",
+            margin: "0",
+            textAlign: "start",
         }),
     };
     
     const CustomOption = (props: any) => {
         const { data } = props;       
-        const isAllOption = data.value === "All" && selectedValue.length === keyWords.length
-        const notAllSelect = data.value === "All" && selectedValue.length < keyWords.length && selectedValue.length > 0;
-        const isSelected = selectedValue.includes(data.value) || isAllOption;
+        const isAllOption = data.value === "ALL" && selectedReview.length === initialValue.length
+        const notAllSelect = data.value === "ALL" && selectedReview.length < initialValue.length && selectedReview.length > 0;
+        const isSelected = selectedReview.includes(data.value) || isAllOption;
 
         let content;
         if (notAllSelect) {
@@ -69,28 +75,28 @@ export const KeywordSelect: React.FC<KeywordSelectProps> = ({ setParams, feedsDa
     };
 
     const CustomDropdownIndicator = (props: any) => {
-    return (
-        <components.DropdownIndicator {...props}>
-            <svg width={16} height={16} color={theme.palette.gray.G400}><use href={`${sprite}#select`} /></svg>
-        </components.DropdownIndicator>
-    );
-};
-
+        return (
+            <components.DropdownIndicator {...props}>
+                <svg width={16} height={16} color={theme.palette.gray.G400}><use href={`${sprite}#select`} /></svg>
+            </components.DropdownIndicator>
+        );
+    };
 
     return (
         <Select<KeywordOption, true, GroupBase<KeywordOption>>
             isMulti
-            name="keywords"
-            options={formattedKeywords(keyWords)}
-            placeholder={displayValue()}
+            name="score"
+            options={formattedKeywords(initialValue)}
+            placeholder={displayValue(selectedReview, initialValue)}
+            isSearchable={false}
             onChange={(word) => {                
                 let newWords = word.map(el => el.value)
                 let searchWord: string[] = [];
 
                 if (newWords.includes("ALL")) {
-                    selectedValue.length > 0 ? searchWord = [] : searchWord = keyWords;
+                    selectedReview.length > 0 ? searchWord = [] : searchWord = initialValue;
                 } else {
-                    searchWord = [...selectedValue];
+                    searchWord = [...selectedReview];
                     newWords.forEach((newWord) => {
                         const index = searchWord.indexOf(newWord);
                         if (index !== -1) {
@@ -100,8 +106,11 @@ export const KeywordSelect: React.FC<KeywordSelectProps> = ({ setParams, feedsDa
                         }
                     });
                 }
-                
-                setSelectedValue(searchWord) 
+                setSelectedReview(searchWord)
+                setSelectedScore([]); 
+                setSelectedKeyWords([]);
+                setSelectedTitle('')
+                setCurrentPage(1)
                 
                 setParams((prevParams: any) => {
                     if (searchWord.length === 0) {
@@ -110,10 +119,11 @@ export const KeywordSelect: React.FC<KeywordSelectProps> = ({ setParams, feedsDa
                     }
                     return {
                         ...prevParams,
+                        pageNumber: 1,
                         searchParameters: [
                             {
                                 searchQuery: searchWord,
-                                searchBy: UpworkFeedSearchBy.Keywords
+                                searchBy: UpworkFeedSearchBy.Review
                             }
                         ],
                     };
@@ -121,8 +131,6 @@ export const KeywordSelect: React.FC<KeywordSelectProps> = ({ setParams, feedsDa
             }}
             styles={customStyles}
             components={{                
-                MultiValue: () => null,
-                ValueContainer: () => <div>{displayValue()}</div>,
                 Option: CustomOption,
                 IndicatorSeparator: () => null,
                 DropdownIndicator: CustomDropdownIndicator,

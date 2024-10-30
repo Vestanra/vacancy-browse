@@ -1,10 +1,10 @@
 import axios from "axios";
-import { ILoginRequestDTO } from "./interfaces-submodule/interfaces/dto/auth/iadmin-login-request.interface";
-import { BaseRoutes } from "./interfaces-submodule/enums/routes/base-routes.enum";
-import { AuthRoutes } from "./interfaces-submodule/enums/routes/auth-routes.enum";
-import { UpworkFeedsRoutesEnum } from "./interfaces-submodule/enums/routes/upwork-feeds-routes.enum";
-import { IUpworkResponseListFeedsDto } from "./interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
-import { getAccessToken } from "./components/hooks/getTokens";
+import { ILoginRequestDTO } from "../../interfaces-submodule/interfaces/dto/auth/iadmin-login-request.interface";
+import { BaseRoutes } from "../../interfaces-submodule/enums/routes/base-routes.enum";
+import { AuthRoutes } from "../../interfaces-submodule/enums/routes/auth-routes.enum";
+import { UpworkFeedsRoutesEnum } from "../../interfaces-submodule/enums/routes/upwork-feeds-routes.enum";
+import { IUpworkResponseListFeedsDto } from "../../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
+import { getAccessToken } from "../hooks/getTokens";
 
 const api = axios.create({
     baseURL: 'https://trainee-api.chat.abcloudz.com',

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useAppDispatch } from "../redux/store"
-import { refreshUser } from "../redux/operationsAuth";
-import { selectLoading, useAppSelector } from "../redux/selectors";
+import { selectLoading, useAppSelector } from "../../redux/selectors";
+import { useAppDispatch } from "../../redux/store";
+import { refreshUser } from "../../redux/operationsAuth";
 
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
     const isLoading = useAppSelector(selectLoading)
@@ -10,7 +10,6 @@ export const RefreshUser = ({ children }: { children: JSX.Element }) => {
     useEffect(() => {
         const refresh = async () => {
             await dispatch(refreshUser());
-            console.log('after initial refresh')
         }
         refresh()
     }, [dispatch])

@@ -7,9 +7,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { LogInPade } from './pages/LogInPage';
-import { PrivateRoute } from './components/PrivateRoute';
-import { RefreshUser } from './components/RefreshUser';
-import { ThemeContextProvider } from './components/ThemeContextProvider';
+import { ThemeContextProvider } from './components/helpers/styles/ThemeContextProvider';
+import { PrivateRoute } from './components/Auth/PrivateRoute';
+import { RefreshUser } from './components/Auth/RefreshUser';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(

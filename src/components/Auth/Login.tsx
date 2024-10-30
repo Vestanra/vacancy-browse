@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import sprite from "../images/svg/sprite.svg";
-import { useAppSelector, selectError, selectLoading } from "../redux/selectors";
+import sprite from "../../images/svg/sprite.svg";
 import { Box, Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { inputStyles } from "./helpers/stylesHelper";
-import {CustomAlert} from "./CustomAlert"
 import { SubmitHandler, useForm } from "react-hook-form";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
+import { selectError, selectLoading, useAppSelector } from "../../redux/selectors";
+import { CustomAlert } from "../helpers/styles/CustomAlert";
+import { inputStyles } from "../helpers/styles/stylesHelper";
 
 interface MyForm {
     email: string;
@@ -40,7 +40,10 @@ export const Login = () => {
     };
     
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', color: theme.palette.gray.G800, }}>
+        <Box sx={{
+            display: 'flex', justifyContent: 'center', color: theme.palette.gray.G800,
+            backgroundColor: theme.palette.primary.main, height: "100vh"
+        }}>
             <Box sx={{ padding: '96px 60px', width: '440px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
                     <svg width={32} height={32}><use href={`${sprite}#logo`} /></svg>
@@ -83,6 +86,7 @@ export const Login = () => {
                     <TextField
                         {...register("email", {required: true})}
                         type="email"
+                        name="email"
                         placeholder="Email"
                         label="Email"
                         variant="filled"
@@ -95,6 +99,7 @@ export const Login = () => {
                         type={passwordVisible ? 'text' : 'password'}
                         placeholder="Password"
                         label="Password"
+                        name="password"
                         variant="filled"
                         fullWidth                        
                         sx={{ ...inputStyles, border: `1px solid ${theme.palette.gray.G400}`, }}

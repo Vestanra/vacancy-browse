@@ -1,8 +1,9 @@
 import { createTheme, CssBaseline, PaletteOptions } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import frameLight from "../images/png/frame-light.png";
-import frameDark from "../images/png/frame-dark.png";
+
+import frameLight from "../../../images/png/frame-light.png";
+import frameDark from "../../../images/png/frame-dark.png";
 
 export interface CustomPaletteOptions extends PaletteOptions {
   blue?: {
@@ -10,12 +11,14 @@ export interface CustomPaletteOptions extends PaletteOptions {
       BA300?: string;
   },
   
-    gray?: {
-      G300?: string;
-      G400?: string;
-      G600?: string;
-      G700?: string;
-      G800?: string;
+  gray?: {
+    G100?: string;
+    G300?: string;
+    G200?: string;
+    G400?: string;
+    G600?: string;
+    G700?: string;
+    G800?: string;
   },
   alertError?: {
     E200?: string;
@@ -59,6 +62,8 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               BA300: '#ABBDE0',
             },
             gray: {
+              G100: '#F6F7F8',
+              G200: '#EBECF0',
               G300: '#D5D7DB',
               G400: '#B0B3B8',
               G600: '#70737A',
@@ -69,7 +74,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               E200: '#FAE1E5',
               E600: '#CC0022',
             },
-            backgroundImage: frameLight,
+            backgroundImage: frameLight,               
           }
           :
           {
@@ -84,6 +89,8 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               BA300: '#3760AD',
             },
             gray: {
+              G100: '#181A1F',
+              G200: '#252733',
               G300: '#414752',
               G400: '#70737A',
               G600: '#B0B3B8',
@@ -93,26 +100,37 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
             alertError: {
               E200: '#3D2B2E',
               E600: '#CC6677',
-            },
-            backgroundImage: frameDark,
+            },      
+            backgroundImage: frameDark, 
           }
         )
        
       } as CustomPaletteOptions,
+       components: {
+          MuiCssBaseline: {
+            styleOverrides: {
+              body: {
+                backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F', 
+                minHeight: '100vh', 
+              },
+            },
+          },
+        },
       typography: {
         fontFamily: `'Poppins', sans-serif`,
-    },
-    breakpoints: {
+      },
+      breakpoints: {
         values: {
-            xs: 0,
-            sm: 360,
-            md: 768,
-            lg: 1440,
-            xl: 1440,
+          xs: 0,
+          sm: 360,
+          md: 768,
+          lg: 1440,
+          xl: 1440,
         }
-    },
+      },      
     }), [themeMode]
   );
+
   return (
     <ThemeContext.Provider value={{ toggleTheme, themeMode }}>
       <ThemeProvider theme={theme}>

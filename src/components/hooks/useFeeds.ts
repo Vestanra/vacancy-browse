@@ -1,4 +1,4 @@
-import { getFeeds } from "../../apiService"
+import { getFeeds } from "../helpers/apiService"
 import { refreshUser } from "../../redux/operationsAuth";
 import { useAppDispatch } from "../../redux/store";
 
@@ -9,7 +9,6 @@ export const useFeeds = () => {
             const result = await getFeeds(params);
             return result;
         } catch (error: any) {
-            console.log(error.status)
             if (error.status === 401) {
                 const refreshResult = await dispatch(refreshUser()).unwrap()
                 if (!refreshResult) return;
