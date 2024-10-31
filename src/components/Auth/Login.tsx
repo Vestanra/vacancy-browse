@@ -51,13 +51,7 @@ export const Login = () => {
                 </Box>
                 <Typography variant="h2" sx={{ fontSize: '32px', fontWeight: '500', margin: '40px 0', textAlign: 'center' }}>Login</Typography>
                 {error &&
-                    <CustomAlert severity="error" sx={{
-                        width: '320px', height: '64px', padding: '0 0 0 12px', marginBottom: '16px',
-                        fontSize: '16px', fontWeight: '600',
-                        borderRadius: '8px', color: theme.palette.primary.dark, backgroundColor: theme.palette.alertError.E200,
-                    }} >
-                        Error<Typography sx={{ fontSize: '14px', fontWeight: '400', }}>{error}</Typography>
-                    </CustomAlert>}
+                    <CustomAlert severity="error" title={error} width="320px"/>}
                 <Box sx={{ display: 'flex', justifyContent: 'center', }}>
                     <Button
                         type="button"

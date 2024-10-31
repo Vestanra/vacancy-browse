@@ -14,9 +14,10 @@ import sprite from "../../images/svg/sprite.svg";
 import { Box } from "@mui/material";
 import { TableFooter } from "./TableFooter";
 import { useTheme } from "@emotion/react";
-import { formattedDate } from "../helpers/functions/formattedDate";
+import { getFormattedDate, getScoreColor } from "../helpers/functions";
 import { useThemeContext } from "../helpers/styles/ThemeContextProvider";
 import { NavLink } from "react-router-dom";
+import { Loader } from "../Loader";
 
 
 export const TableFeeds = () => {
@@ -28,7 +29,7 @@ export const TableFeeds = () => {
     const [selectedItemsPerPage, setSelectedItemsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { data } = useFeedsData(params);
+    const { data, isLoading } = useFeedsData(params);
     const { themeMode } = useThemeContext();
     
     const feedsData: IUpworkFeedItemDTO[] = useMemo(() => {
@@ -97,7 +98,7 @@ export const TableFeeds = () => {
                 const date = row.original?.published;
                 return (
                     <div style={{ width: '140px', padding: '8px', fontSize: "14px" }}>
-                        {formattedDate(date)}
+                        {getFormattedDate(date)}
                     </div>
                 );
             }
@@ -165,16 +166,7 @@ export const TableFeeds = () => {
             ),
             cell: ({ row }) => {
                 const score = row.original?.score;
-                let backgroundColor;
-                if (score >= 80) {
-                    backgroundColor = '#C4E5F5';
-                } else if (score >= 60) {
-                    backgroundColor = '#C9F0C9';
-                } else if (score >= 40) {
-                    backgroundColor = '#FAD2B4';
-                } else {
-                    backgroundColor = '#FAC8D0';
-                }
+                let backgroundColor = getScoreColor(score, themeMode);
                 return <div
                     style={{
                         padding: '2px 8px',
@@ -184,7 +176,8 @@ export const TableFeeds = () => {
                         backgroundColor: backgroundColor,
                         textAlign: "center",
                         marginTop: "8px",
-                        marginLeft: "8px"
+                        marginLeft: "8px",
+                        color: theme.palette.primary.dark,
                     }}
                 >
                     {score}
@@ -260,60 +253,63 @@ export const TableFeeds = () => {
    
     return (
         <>
-            <Box sx={{ width: "1120px", padding: '8px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center" }} >
-                <TableHeader
-                    setParams={setParams}
-                    setSelectedTitle={setSelectedTitle}
-                />
-                <table style={{ borderCollapse: 'collapse', marginTop: '16px', }}>
-                    <thead>
-                        {table.getHeaderGroups().map(headerGroup => (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map(header => (
-                                    <th key={header.id}
-                                        style={{
-                                            height: "116px", padding: '0px',
-                                            borderBottom: `1px solid ${theme.palette.gray.G400}`, color: theme.palette.gray.G700
-                                        }}>
-                                        {flexRender(
-                                            header.column.columnDef.header,
-                                            header.getContext()
-                                        )}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody>
-                        {table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
-                                {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id}
-                                        style={{
-                                            borderBottom: `1px solid ${theme.palette.gray.G400}`,
-                                            color: theme.palette.gray.G700, verticalAlign: 'top', padding: "0px", width: 'auto',
-                                        }}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                {feedsData.length > 0
-                    ? <TableFooter
-                        data={data}
-                        selectedItemsPerPage={selectedItemsPerPage}
-                        setSelectedItemsPerPage={setSelectedItemsPerPage}
+            {isLoading
+                ? <Loader />
+                : <Box sx={{ width: "1120px", padding: '8px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center" }} >
+                    <TableHeader
                         setParams={setParams}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
+                        setSelectedTitle={setSelectedTitle}
                     />
-                    : <div style={{ padding: "20px" }}>Nothing found for your request.</div>}
-            </Box>
+                    <table style={{ borderCollapse: 'collapse', marginTop: '16px', }}>
+                        <thead>
+                            {table.getHeaderGroups().map(headerGroup => (
+                                <tr key={headerGroup.id}>
+                                    {headerGroup.headers.map(header => (
+                                        <th key={header.id}
+                                            style={{
+                                                height: "116px", padding: '0px',
+                                                borderBottom: `1px solid ${theme.palette.gray.G400}`, color: theme.palette.gray.G700
+                                            }}>
+                                            {flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                        </th>
+                                    ))}
+                                </tr>
+                            ))}
+                        </thead>
+                        <tbody>
+                            {table.getRowModel().rows.map(row => (
+                                <tr key={row.id}>
+                                    {row.getVisibleCells().map(cell => (
+                                        <td key={cell.id}
+                                            style={{
+                                                borderBottom: `1px solid ${theme.palette.gray.G400}`,
+                                                color: theme.palette.gray.G700, verticalAlign: 'top', padding: "0px", width: 'auto',
+                                            }}>
+                                            {flexRender(
+                                                cell.column.columnDef.cell,
+                                                cell.getContext()
+                                            )}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {feedsData.length > 0
+                        ? <TableFooter
+                            data={data}
+                            selectedItemsPerPage={selectedItemsPerPage}
+                            setSelectedItemsPerPage={setSelectedItemsPerPage}
+                            setParams={setParams}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
+                        : <div style={{ padding: "20px" }}>Nothing found for your request.</div>}
+                </Box>
+            }
         </>
     )
 };

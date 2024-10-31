@@ -56,6 +56,18 @@
         <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14" id="lines">
             <path fill="currentColor" fill-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1Zm0 6a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1Zm1 5a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2H1Z" clip-rule="evenodd"></path>
         </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="info">
+            <path fill="currentColor" fill-rule="evenodd" d="M23 12c0 6.075-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1s11 4.925 11 11Zm-12 0v4a1 1 0 0 0 1 1h1a1 1 0 1 0 0-2v-4a1 1 0 0 0-1-1h-1a1 1 0 1 0 0 2Zm1-3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="warning">
+            <path fill="currentColor" fill-rule="evenodd" d="M13.291 2.185a1.5 1.5 0 0 0-2.582 0L.337 19.737A1.5 1.5 0 0 0 1.63 22H22.37a1.5 1.5 0 0 0 1.292-2.263L13.29 2.185ZM11.002 8a1 1 0 1 1 2 0v6a1 1 0 1 1-2 0V8Zm0 10a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="error">
+            <path fill="currentColor" fill-rule="evenodd" d="M8.272 1a2 2 0 0 0-1.414.586L1.586 6.858A2 2 0 0 0 1 8.272v7.456a2 2 0 0 0 .586 1.414l5.272 5.272A2 2 0 0 0 8.272 23h7.456a2 2 0 0 0 1.414-.586l5.272-5.272A2 2 0 0 0 23 15.728V8.272a2 2 0 0 0-.586-1.414l-5.272-5.272A2 2 0 0 0 15.728 1H8.272Zm8.435 6.293a1 1 0 0 1 0 1.414L13.414 12l3.293 3.293a1 1 0 0 1-1.414 1.414L12 13.414l-3.293 3.293a1 1 0 0 1-1.414-1.414L10.586 12 7.293 8.707a1 1 0 0 1 1.414-1.414L12 10.586l3.293-3.293a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="success">
+            <path fill="currentColor" fill-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11Zm5.707-14.707a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414 0l-3-3a1 1 0 1 1 1.414-1.414L11 13.586l5.293-5.293a1 1 0 0 1 1.414 0Z" clip-rule="evenodd"></path>
+        </symbol>
     </defs>
 </svg>
 

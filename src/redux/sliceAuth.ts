@@ -19,6 +19,7 @@ export interface AuthState {
     loginData: IAccountDTO;
     isAuth: boolean;
     loading: boolean;
+    isRefreshing: boolean,
     error: null | string | undefined;
 }
 
@@ -26,6 +27,7 @@ const initialState: AuthState = {
     loginData: userData,
     isAuth: false,
     loading: false,
+    isRefreshing: true,
     error: null,
 };
 
@@ -43,7 +45,6 @@ const authSlice = createSlice({
             })
             .addCase(logIn.pending, state => {
                 state.loading = true;
-                state.error = null;
             })
             .addCase(logIn.rejected, (state, action) => {
                 state.isAuth = false;
@@ -55,16 +56,18 @@ const authSlice = createSlice({
                 state.isAuth = true;
                 state.loading = false;
                 state.error = null;
+                state.isRefreshing = false;
             })
             .addCase(refreshUser.pending, state => {
                 state.loading = true;
-                state.error = null;
+                state.isRefreshing = true;
             })
             .addCase(refreshUser.rejected, (state) => {
                 state.loginData = userData;
                 state.isAuth = false;
                 state.loading = false;
                 state.error = null;
+                state.isRefreshing = false;
             })
             .addCase(logOut.fulfilled, (state) => {
                 state.loginData = userData;

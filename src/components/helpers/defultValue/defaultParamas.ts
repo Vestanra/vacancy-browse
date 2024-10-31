@@ -2,12 +2,6 @@ export const defaultParams = {
     pageSize: 10,
     pageNumber: 1,
     sortDirection: "asc",
-    // searchParameters: [
-    //     {
-    //         searchQuery:  [""],
-    //         searchBy: "keywords"
-    //     }
-    // ],
     sortBy: "title"
 };
 

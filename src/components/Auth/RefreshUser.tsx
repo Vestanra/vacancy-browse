@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { selectLoading, useAppSelector } from "../../redux/selectors";
+import { selectIsRefreshing, useAppSelector } from "../../redux/selectors";
 import { useAppDispatch } from "../../redux/store";
 import { refreshUser } from "../../redux/operationsAuth";
+import { Loader } from "../Loader";
 
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
-    const isLoading = useAppSelector(selectLoading)
-    const dispatch = useAppDispatch();
+    const isRefreshing = useAppSelector(selectIsRefreshing);
+    const dispatch = useAppDispatch();  
 
     useEffect(() => {
         const refresh = async () => {
@@ -14,6 +15,6 @@ export const RefreshUser = ({ children }: { children: JSX.Element }) => {
         refresh()
     }, [dispatch])
 
-    return isLoading ?  <div>Loading...</div> : children;
+    return isRefreshing ? <Loader/> : children;
 }
    

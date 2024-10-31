@@ -2,11 +2,11 @@ import Select, { GroupBase, components  } from "react-select";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
 import { KeywordOption, KeywordSelectProps } from "../helpers/types";
 import { useEffect, useState } from "react";
-import { calculateKeyWords, displayValue, formattedKeywords } from "../helpers/functions/selectFunctions";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import "../helpers/styles/overflow.css"
+import { getDisplayValue, getFormattedKeywords, getUniqueKeywords } from "../helpers/functions";
 
 export const KeywordSelect: React.FC<KeywordSelectProps> =
     ({ setParams, feedsData, selected: selectedKeyWords, setSelected: setSelectedKeyWords, setSelectedScore, setSelectedTitle, setSelectedReview, setCurrentPage }) => {
@@ -16,7 +16,7 @@ export const KeywordSelect: React.FC<KeywordSelectProps> =
 
     useEffect(() => {
         if (feedsData.length > 0) {
-            const newValue = calculateKeyWords(feedsData);
+            const newValue = getUniqueKeywords(feedsData);
             setInitialValue(newValue);
         }
     }, [feedsData]);
@@ -96,9 +96,9 @@ export const KeywordSelect: React.FC<KeywordSelectProps> =
         <Select<KeywordOption, true, GroupBase<KeywordOption>>
             isMulti
             name="keywords"
-            placeholder={displayValue(selectedKeyWords, initialValue)}
+            placeholder={getDisplayValue(selectedKeyWords, initialValue)}
             isSearchable={false}
-            options={formattedKeywords(initialValue)}
+            options={getFormattedKeywords(initialValue)}
             onChange={(word) => {                
                 let newWords = word.map(el => el.value)
                 let searchWord: string[] = [];

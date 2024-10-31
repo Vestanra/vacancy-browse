@@ -23,7 +23,19 @@ export interface CustomPaletteOptions extends PaletteOptions {
   alertError?: {
     E200?: string;
     E600?: string;
-  };  
+  };
+  alertWarning?: {
+    E200?: string;
+    E600?: string;
+  };
+  alertInfo?: {
+    E200?: string;
+    E600?: string;
+  };
+  alertSuccess?: {
+    E200?: string;
+    E600?: string;
+  };
 };
 
 const ThemeContext = createContext({
@@ -74,6 +86,18 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               E200: '#FAE1E5',
               E600: '#CC0022',
             },
+            alertWarning: {
+              E200: '#FAE9C8',
+              E600: '#F9902D',
+            },
+            alertSuccess: {
+              E200: '#DCF2DC',
+              E600: '#187A18',
+            },
+            alertInfo: {
+              E200: '#DCEDF5',
+              E600: '#1F7099',
+            },
             backgroundImage: frameLight,               
           }
           :
@@ -100,7 +124,19 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
             alertError: {
               E200: '#3D2B2E',
               E600: '#CC6677',
-            },      
+            },
+            alertWarning: {
+              E200: '#4D4536',
+              E600: '#F9AC64',
+            },
+            alertSuccess: {
+              E200: '#2B3D2B',
+              E600: '#57AD57',
+            },
+            alertInfo: {
+              E200: '#2B373D',
+              E600: '#52A3CC',
+            },
             backgroundImage: frameDark, 
           }
         )

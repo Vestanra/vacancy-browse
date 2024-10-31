@@ -11,7 +11,7 @@ import { ThemeContextProvider } from './components/helpers/styles/ThemeContextPr
 import { PrivateRoute } from './components/Auth/PrivateRoute';
 import { RefreshUser } from './components/Auth/RefreshUser';
 import { Layout } from './components/Layout';
-import { FeedById } from './pages/FeedPage';
+import { FeedPage } from './pages/FeedPage';
 import { ChatPage } from './pages/ChatPage';
 
 const queryClient = new QueryClient();
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "feeds/:id",
-        element: <PrivateRoute children={<FeedById />} />
+        element: <PrivateRoute children={<FeedPage />} />
       },
       {
         path: "feeds/chat",

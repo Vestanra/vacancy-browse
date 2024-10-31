@@ -2,7 +2,7 @@ import { Box, Pagination } from "@mui/material";
 import { TableFooterProps } from "../helpers/types"
 import { SelectedItemsPerPage } from "./SelectedItemsPerPage";
 import { useTheme } from "@emotion/react";
-import { formatedItemsShown } from "../helpers/functions/formatedItemsShown";
+import { getFormatedItemsShown } from "../helpers/functions";
 
 export const TableFooter: React.FC<TableFooterProps> = ({ data, selectedItemsPerPage, setSelectedItemsPerPage, setParams, currentPage, setCurrentPage }) => {
     const theme: any = useTheme();
@@ -23,7 +23,7 @@ export const TableFooter: React.FC<TableFooterProps> = ({ data, selectedItemsPer
         }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: "12px", color: theme.palette.primary.dark}}>
                 <div>Items shown: 
-                    <span style={{fontWeight: "600"}}> {formatedItemsShown(currentPage, selectedItemsPerPage, data?.items.totalCount)} </span>
+                    <span style={{fontWeight: "600"}}> {getFormatedItemsShown(currentPage, selectedItemsPerPage, data?.items.totalCount)} </span>
                     out of
                     <span style={{fontWeight: "600"}}> {data?.items.totalCount}</span>
                 </div>

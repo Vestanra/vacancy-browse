@@ -1,10 +1,10 @@
 import Select, { GroupBase, components  } from "react-select";
 import { KeywordOption, ScoreSelectProps } from "../helpers/types";
-import { displayValue, formattedKeywords } from "../helpers/functions/selectFunctions";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
+import { getDisplayValue, getFormattedKeywords } from "../helpers/functions";
 
 const initialValue = ["0 - 19", "20 - 39", "40 - 59", "60 - 79", "80 - 100"];
 
@@ -87,8 +87,8 @@ export const ScoreSelect: React.FC<ScoreSelectProps> =
         <Select<KeywordOption, true, GroupBase<KeywordOption>>
             isMulti
             name="score"
-            options={formattedKeywords(initialValue)}
-            placeholder={displayValue(selectedScore, initialValue)}
+            options={getFormattedKeywords(initialValue)}
+            placeholder={getDisplayValue(selectedScore, initialValue)}
             isSearchable={false}
             onChange={(word) => {
                 let newWords = word.map(el => el.value)

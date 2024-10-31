@@ -1,10 +1,10 @@
 import Select, { GroupBase, components  } from "react-select";
 import { KeywordOption, ReviewSelectProps, } from "../helpers/types";
-import { displayValue, formattedKeywords } from "../helpers/functions/selectFunctions";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
+import { getDisplayValue, getFormattedKeywords } from "../helpers/functions";
 
 export const ReviewSelect: React.FC<ReviewSelectProps> = ({ setParams, setSelectedScore, setSelectedKeyWords, setSelectedTitle, selectedReview, setSelectedReview, setCurrentPage }) => {
 
@@ -86,8 +86,8 @@ export const ReviewSelect: React.FC<ReviewSelectProps> = ({ setParams, setSelect
         <Select<KeywordOption, true, GroupBase<KeywordOption>>
             isMulti
             name="score"
-            options={formattedKeywords(initialValue)}
-            placeholder={displayValue(selectedReview, initialValue)}
+            options={getFormattedKeywords(initialValue)}
+            placeholder={getDisplayValue(selectedReview, initialValue)}
             isSearchable={false}
             onChange={(word) => {                
                 let newWords = word.map(el => el.value)
