@@ -5,7 +5,7 @@ import { Login } from "../components/Auth/Login";
 export const LogInPade = () => {
     const { email } = useAppSelector(selectUserData);
     if (email) {
-        return <Navigate to={"/"} replace/>
+        return <Navigate to={"/feeds"} replace/>
     }
     
     return (

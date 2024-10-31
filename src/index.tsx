@@ -10,6 +10,9 @@ import { LogInPade } from './pages/LogInPage';
 import { ThemeContextProvider } from './components/helpers/styles/ThemeContextProvider';
 import { PrivateRoute } from './components/Auth/PrivateRoute';
 import { RefreshUser } from './components/Auth/RefreshUser';
+import { Layout } from './components/Layout';
+import { FeedById } from './pages/FeedPage';
+import { ChatPage } from './pages/ChatPage';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -22,14 +25,32 @@ const router = createBrowserRouter([
     element: <LogInPade />
   },
   {
-    path: "/feeds",
-    element: <PrivateRoute children={<HomePage /> }/>
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/feeds" replace />
+      },
+      {
+        path: "feeds",
+        element: <PrivateRoute children={<HomePage />} />
+      },
+      {
+        path: "feeds/:id",
+        element: <PrivateRoute children={<FeedById />} />
+      },
+      {
+        path: "feeds/chat",
+        element: <PrivateRoute children={<ChatPage />} />
+      },
+    ]
   },
   {
     path: "*",
-    element: <Navigate to="/feeds" replace/>,
-  }
-])
+    element: <Navigate to="/feeds" replace />,
+  },
+]);
 
 root.render(
   <React.StrictMode>

@@ -16,6 +16,7 @@ import { TableFooter } from "./TableFooter";
 import { useTheme } from "@emotion/react";
 import { formattedDate } from "../helpers/functions/formattedDate";
 import { useThemeContext } from "../helpers/styles/ThemeContextProvider";
+import { NavLink } from "react-router-dom";
 
 
 export const TableFeeds = () => {
@@ -27,7 +28,7 @@ export const TableFeeds = () => {
     const [selectedItemsPerPage, setSelectedItemsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { data, isError, isLoading } = useFeedsData(params);
+    const { data } = useFeedsData(params);
     const { themeMode } = useThemeContext();
     
     const feedsData: IUpworkFeedItemDTO[] = useMemo(() => {
@@ -63,15 +64,9 @@ export const TableFeeds = () => {
                 const id = row.original?.id;
                 return (
                     <div style={{ width: "208px", padding: '8px', }}>
-                        <div
-                            onClick={(e) => {
-                                e.preventDefault();
-                                console.log(id)
-                            }}
-                            style={{ color: theme.palette.primary.contrastText, cursor: 'pointer' }}
-                        >
+                        <NavLink to={`/feeds/${id}`} style={{ color: theme.palette.primary.contrastText, textDecoration: "none" }}>
                             {title}
-                        </div>
+                        </NavLink>
                     </div>
                 );
             }
@@ -265,72 +260,60 @@ export const TableFeeds = () => {
    
     return (
         <>
-            {isLoading ? (<div>Loading...</div>)
-                : isError ? (<div>Error: {isError}</div>)
-                    : (
-                        <Box sx={{ width: "1120px", padding: '8px 16px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center" }} >
-                            <TableHeader
-                                setParams={setParams}
-                                setSelectedTitle={setSelectedTitle}
-                            />
-                            <table style={{ borderCollapse: 'collapse', marginTop: '16px', }}>
-                                <thead>
-                                    {table.getHeaderGroups().map(headerGroup => (
-                                        <tr key={headerGroup.id}>
-                                            {headerGroup.headers.map(header => (
-                                                <th key={header.id}
-                                                    style={{
-                                                        height: "116px", padding: '0px',
-                                                        borderBottom: `1px solid ${theme.palette.gray.G400}`, color: theme.palette.gray.G700
-                                                    }}>
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </thead>
-                                <tbody>
-                                    {table.getRowModel().rows.map(row => (
-                                        <tr key={row.id}>
-                                            {row.getVisibleCells().map(cell => (
-                                                <td key={cell.id}
-                                                    style={{
-                                                        borderBottom: `1px solid ${theme.palette.gray.G400}`,
-                                                        color: theme.palette.gray.G700, verticalAlign: 'top', padding: "0px", width: 'auto',
-                                                    }}>
-                                                    {flexRender(
-                                                        cell.column.columnDef.cell,
-                                                        cell.getContext()
-                                                    )}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                            {/* <TableFooter
-                                data={data}
-                                selectedItemsPerPage={selectedItemsPerPage}
-                                setSelectedItemsPerPage={setSelectedItemsPerPage}
-                                setParams={setParams}
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}                                
-                            /> */}
-                            {feedsData.length > 0
-                                ? <TableFooter
-                                data={data}
-                                selectedItemsPerPage={selectedItemsPerPage}
-                                setSelectedItemsPerPage={setSelectedItemsPerPage}
-                                setParams={setParams}
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}                                
-                                />
-                        : <div style={{padding: "20px"}}>Nothing found for your request.</div> }
-                        </Box>
-                    )}
+            <Box sx={{ width: "1120px", padding: '8px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center" }} >
+                <TableHeader
+                    setParams={setParams}
+                    setSelectedTitle={setSelectedTitle}
+                />
+                <table style={{ borderCollapse: 'collapse', marginTop: '16px', }}>
+                    <thead>
+                        {table.getHeaderGroups().map(headerGroup => (
+                            <tr key={headerGroup.id}>
+                                {headerGroup.headers.map(header => (
+                                    <th key={header.id}
+                                        style={{
+                                            height: "116px", padding: '0px',
+                                            borderBottom: `1px solid ${theme.palette.gray.G400}`, color: theme.palette.gray.G700
+                                        }}>
+                                        {flexRender(
+                                            header.column.columnDef.header,
+                                            header.getContext()
+                                        )}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody>
+                        {table.getRowModel().rows.map(row => (
+                            <tr key={row.id}>
+                                {row.getVisibleCells().map(cell => (
+                                    <td key={cell.id}
+                                        style={{
+                                            borderBottom: `1px solid ${theme.palette.gray.G400}`,
+                                            color: theme.palette.gray.G700, verticalAlign: 'top', padding: "0px", width: 'auto',
+                                        }}>
+                                        {flexRender(
+                                            cell.column.columnDef.cell,
+                                            cell.getContext()
+                                        )}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {feedsData.length > 0
+                    ? <TableFooter
+                        data={data}
+                        selectedItemsPerPage={selectedItemsPerPage}
+                        setSelectedItemsPerPage={setSelectedItemsPerPage}
+                        setParams={setParams}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
+                    : <div style={{ padding: "20px" }}>Nothing found for your request.</div>}
+            </Box>
         </>
     )
 };
