@@ -27,17 +27,31 @@ export const FeedMatchedCases: React.FC<FeedInfoProps> = ({ data, matchedItem, s
                         padding: "8px",
                         borderBottom: `1px dashed ${theme.palette.gray.G300}`
                     }} >
-                        <div>
-                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", }}>
-                                <h2 style={{ margin: "0 0 12px 0" }}>
-                                    <a href={el.link} target="_blank" rel="noopener noreferrer"
-                                        style={{
-                                            color: theme.palette.primary.contrastText,
-                                            fontSize: '16px',
-                                            fontWeight: '400',
-                                        }}
-                                    >{el.title}</a>
-                                </h2>
+                            <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", alignItems: "baseline" }}>
+                                <div>
+                                    <h2 style={{ margin: "0 0 12px 0" }}>
+                                        <a href={el.link} target="_blank" rel="noopener noreferrer"
+                                            style={{
+                                                color: theme.palette.primary.contrastText,
+                                                fontSize: '16px',
+                                                fontWeight: '400',
+                                            }}
+                                        >{el.title}</a>
+                                    </h2>
+                                    <p style={{ margin: "0 0 12px 0" }} >{el.content}</p>
+                                    {key.map((key) => {
+                                        const item = el.infoBlock?.find((i: any) => i.key === key && i.value !== "");
+                                        if (!item) return null;
+                                        const value = key === "Published" ? getFormattedDate(item.value) : item.value;
+                                
+                                        return (
+                                            <div key={key} style={{ display: "flex", gap: "8px" }}>
+                                                <div style={{ width: "101px", flexShrink: 0, fontSize: "14px", color: theme.palette.gray.G600 }}>{item.key}: </div>
+                                                <div>{value}</div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                                 <div onClick={() => handleSelect(el.link)}>
                                     {matchedItem.includes(el.link)
                                         ? <svg width={20} height={20}><use href={`${sprite}#is-select`} /></svg>
@@ -45,20 +59,6 @@ export const FeedMatchedCases: React.FC<FeedInfoProps> = ({ data, matchedItem, s
                                     }
                                 </div>
                             </div>
-                            <p style={{ margin: "0 0 12px 0" }} >{el.content}</p>
-                            {key.map((key) => {
-                                const item = el.infoBlock?.find((i: any) => i.key === key && i.value !== "");
-                                if (!item) return null;
-                                const value = key === "Published" ? getFormattedDate(item.value) : item.value;
-                                
-                                return (
-                                    <div key={key} style={{ display: "flex", gap: "8px" }}>
-                                        <div style={{ width: "101px", flexShrink: 0, fontSize: "14px", color: theme.palette.gray.G600 }}>{item.key}: </div>
-                                        <div>{value}</div>
-                                    </div>
-                                )
-                            })}
-                        </div>
                     </li>
                 ))}
         </ul>
