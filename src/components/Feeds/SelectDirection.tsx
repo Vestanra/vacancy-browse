@@ -4,10 +4,9 @@ import { SelectDirectionProps } from "../helpers/types";
 export const SelectDirection: React.FC<SelectDirectionProps> = ({setParams, sortBy}) => {
     const theme: any = useTheme();   
     const handleClick = () => {
-        console.log('first')
         setParams((prev: any) => ({
             ...prev,
-            sortDirection: prev.sortDirection === "asc" ? "desc" : "asc",
+            sortDirection: prev.sortDirection === "desc" ? "asc" : "desc",
             sortBy,
         }));
     };

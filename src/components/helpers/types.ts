@@ -104,3 +104,8 @@ export interface ItemsPerPageOption {
     label: string;
 }
 
+export interface FeedInfoProps {
+    data: any; 
+    setMatchedItem: (prev: any) => void;
+    matchedItem: string[];
+}

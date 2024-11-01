@@ -1,4 +1,4 @@
-import { useFeedsData } from "../hooks/useFeddsQuery";
+import { useFeedsData } from "../hooks/useFeedsQuery";
 import { IUpworkFeedItemDTO } from "../../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
@@ -16,9 +16,8 @@ import { TableFooter } from "./TableFooter";
 import { useTheme } from "@emotion/react";
 import { getFormattedDate, getScoreColor } from "../helpers/functions";
 import { useThemeContext } from "../helpers/styles/ThemeContextProvider";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Loader } from "../Loader";
-
 
 export const TableFeeds = () => {
     const [params, setParams] = useState({});
@@ -29,14 +28,15 @@ export const TableFeeds = () => {
     const [selectedItemsPerPage, setSelectedItemsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { data, isLoading } = useFeedsData(params);
+    const theme: any = useTheme();
     const { themeMode } = useThemeContext();
+    const navigate = useNavigate();
     
+    const { data, isLoading } = useFeedsData(params);       
     const feedsData: IUpworkFeedItemDTO[] = useMemo(() => {
         return data?.items?.items || []
     }, [data]);
-    const theme: any = useTheme();
-
+   
     const columns: ColumnDef<IUpworkFeedItemDTO>[] = [
         {
             accessorKey: "title",
@@ -61,13 +61,16 @@ export const TableFeeds = () => {
                 </Box>
             ),
             cell: ({ row }) => {
-                const title = row.original?.title;
-                const id = row.original?.id;
                 return (
                     <div style={{ width: "208px", padding: '8px', }}>
-                        <NavLink to={`/feeds/${id}`} style={{ color: theme.palette.primary.contrastText, textDecoration: "none" }}>
-                            {title}
-                        </NavLink>
+                        <a href={row.original?.url} target="_blank" rel="noopener noreferrer"
+                            style={{
+                                color: theme.palette.primary.contrastText,
+                                textDecoration: "none",
+                                fontSize: '16px',
+                                fontWeight: '400',
+                            }}
+                        >{row.original?.title}</a>
                     </div>
                 );
             }
@@ -166,6 +169,7 @@ export const TableFeeds = () => {
             ),
             cell: ({ row }) => {
                 const score = row.original?.score;
+                if (!score) return
                 let backgroundColor = getScoreColor(score, themeMode);
                 return <div
                     style={{
@@ -178,6 +182,8 @@ export const TableFeeds = () => {
                         marginTop: "8px",
                         marginLeft: "8px",
                         color: theme.palette.primary.dark,
+                        fontWeight: "500",
+                        lineHeight: '24px',
                     }}
                 >
                     {score}
@@ -281,7 +287,11 @@ export const TableFeeds = () => {
                         </thead>
                         <tbody>
                             {table.getRowModel().rows.map(row => (
-                                <tr key={row.id}>
+                                <tr
+                                    key={row.id}
+                                    onClick={() => navigate(`/feeds/${row.original.id}`)}
+                                    style={{ cursor: 'pointer' }}
+                                >
                                     {row.getVisibleCells().map(cell => (
                                         <td key={cell.id}
                                             style={{
@@ -312,7 +322,4 @@ export const TableFeeds = () => {
             }
         </>
     )
-};
-
-
-            
+};            

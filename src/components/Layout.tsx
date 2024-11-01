@@ -3,7 +3,7 @@ import { useThemeContext } from "../components/helpers/styles/ThemeContextProvid
 import sprite from "../images/svg/sprite.svg";
 import { useTheme } from "@emotion/react";
 import { Box, Button } from "@mui/material";
-import { useFeedsData } from "./hooks/useFeddsQuery";
+import { useFeedsData } from "./hooks/useFeedsQuery";
 import { Sidebar } from "./Sidebar";
 import { useState } from "react";
 import { Loader } from "./Loader";
@@ -28,7 +28,7 @@ export const Layout: React.FC = () => {
                         <Box sx={{ display: "flex", width: "1440px", }}>
                             {isSidebar && <Sidebar />}
                             <div style={{ margin: "0 auto", width: "1120px" }}>
-                                <Box sx={{ display: "flex", justifyContent: "space-between", paddingTop: '24px' }}>
+                                <Box sx={{ display: "flex", justifyContent: "space-between", padding: '24px 0' }}>
                                     <Button
                                         type="button"
                                         onClick={handleSideBar}

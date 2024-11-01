@@ -1,8 +1,7 @@
-import { useParams } from "react-router-dom";
+import { FeedById } from "../components/Feed/Feed";
 
 export const FeedPage = () => {
-    const { id } = useParams<{ id: string }>();
     return (
-        <div>Feed by id - { id }</div>
+        <FeedById />
     )
-}
+};

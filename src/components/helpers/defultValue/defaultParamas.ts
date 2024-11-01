@@ -1,7 +1,6 @@
 export const defaultParams = {
     pageSize: 10,
     pageNumber: 1,
-    sortDirection: "asc",
     sortBy: "title"
 };
 
