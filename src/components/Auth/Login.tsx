@@ -32,10 +32,10 @@ export const Login = () => {
     }, [errorMessage])
     
     const handlePasswordToggle = () => {
-        setPasswordVisible(!passwordVisible);        
+        setPasswordVisible(!passwordVisible);
     };
 
-    const submit: SubmitHandler<MyForm> = ({email, password}) => {
+    const submit: SubmitHandler<MyForm> = ({ email, password }) => {
         login({ email, password });
     };
     
@@ -51,17 +51,12 @@ export const Login = () => {
                 </Box>
                 <Typography variant="h2" sx={{ fontSize: '32px', fontWeight: '500', margin: '40px 0', textAlign: 'center' }}>Login</Typography>
                 {error &&
-                    <CustomAlert severity="error" title={error} width="320px"/>}
+                    <CustomAlert severity="error" title={error} width="320px" />}
                 <Box sx={{ display: 'flex', justifyContent: 'center', }}>
                     <Button
                         type="button"
                         onClick={() => setError("Please enter email and password.")}
-                        sx={{
-                            width: '320px', textTransform: 'none', height: '48px', 
-                            color: theme.palette.gray.G800, textAlign: 'center',
-                            border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px',
-                            '&:hover': {backgroundColor: theme.palette.blue.B100,},
-                        }}>
+                        sx={{width: '320px', }}>
                         <svg width={24} height={24}>
                             <use href={`${sprite}#microsoft-logo`} />
                         </svg>
@@ -78,24 +73,29 @@ export const Login = () => {
                     onSubmit={handleSubmit(submit)}
                     sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <TextField
-                        {...register("email", {required: true})}
+                        {...register("email", { required: true })}
                         type="email"
                         name="email"
                         placeholder="Email"
                         label="Email"
                         variant="filled"
-                        fullWidth                        
+                        fullWidth
                         sx={{ ...inputStyles, border: `1px solid ${theme.palette.gray.G400}`, marginBottom: '16px' }}
+                        slotProps={{
+                            htmlInput: {
+                                autoComplete: "username" 
+                            }
+                        }}
 
                     />
                     <TextField
-                        {...register("password", {required: true})}
+                        {...register("password", { required: true })}
                         type={passwordVisible ? 'text' : 'password'}
                         placeholder="Password"
                         label="Password"
                         name="password"
                         variant="filled"
-                        fullWidth                        
+                        fullWidth
                         sx={{ ...inputStyles, border: `1px solid ${theme.palette.gray.G400}`, }}
                         slotProps={{
                             input: {
@@ -108,27 +108,26 @@ export const Login = () => {
                                                 sx={{ color: theme.palette.primary.dark }} />
                                         </Button>
                                     </InputAdornment>
+                            },
+                            htmlInput: {
+                                autoComplete: "current-password"
                             }
                         }}
                     />
                     <Button component="button"
                         type="submit"
                         disabled={isLoading}
-                        sx={{
-                            width: '320px', marginTop: '16px', textTransform: 'none', height: '48px', textAlign: 'center',
-                            color: theme.palette.gray.G800,
-                            border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px',
-                            '&:hover': {backgroundColor: theme.palette.blue.B100,},
-                        }}>Log in
+                        sx={{ width: '320px', marginTop: '16px', }}>
+                        Log in
                     </Button>
                 </Box>
             </Box>
-            <Box
+            <Box aria-hidden="true"
                 sx={{
                     backgroundImage: `url(${theme.palette.backgroundImage})`,
                     backgroundSize: 'cover', backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    height: '100vh', maxWidth: '1000px', width: '100%', display: { xs: 'none', lg: 'block' },
+                    height: '100vh', maxWidth: '1000px', width: '100%',
                 }} />
         </Box>
     );

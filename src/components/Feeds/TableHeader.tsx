@@ -15,12 +15,9 @@ export const TableHeader: React.FC<TableHeaderProps> = ({setParams, setSelectedT
             <Box sx={{width: '600px', height: '48px', padding: '12px', border: `2px solid ${theme.palette.gray.G400}`, borderRadius: '8px', display: 'flex', alignItems: 'center'}}>IT Networking 2</Box>
             <Button type="submit"                        
                         sx={{
-                            width: '158px', textTransform: 'none', height: '48px', textAlign: 'center',
-                            padding: '12px 16px',  fontSize: '16px', fontWeight: '500',
+                            width: '158px', padding: '12px 16px',
+                            fontSize: '16px', fontWeight: '500',
                             display: 'flex', justifyContent: 'space-between',
-                            color: theme.palette.gray.G800,
-                            border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px',
-                            '&:hover': {backgroundColor: theme.palette.blue.B100,},
                         }}
                 onClick={handleClick}>
                 <span>Refresh RSS</span>

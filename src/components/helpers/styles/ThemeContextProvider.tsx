@@ -148,22 +148,27 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               body: {
                 backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F', 
                 minHeight: '100vh', 
-              },
+              },             
             },
-          },
+         },
+         MuiButton: {
+                styleOverrides: {
+                  root: {
+                    textTransform: 'none',
+                    color: themeMode === 'light' ? '#252733' : '#EBECF0',
+                    border: `2px solid ${themeMode === 'light' ? '#ABBDE0' : '#3760AD'}`,
+                    borderRadius: '8px',
+                    '&:hover': { backgroundColor: themeMode === 'light' ? '#F0F5FF' : '#181B29FF', },
+                    height: '48px',
+                    textAlign: 'center',
+                    },
+                  },
+              },
         },
       typography: {
         fontFamily: `'Poppins', sans-serif`,
       },
-      breakpoints: {
-        values: {
-          xs: 0,
-          sm: 360,
-          md: 768,
-          lg: 1440,
-          xl: 1440,
-        }
-      },      
+      
     }), [themeMode]
   );
 

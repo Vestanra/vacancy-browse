@@ -49,7 +49,7 @@ export const SelectedItemsPerPage: React.FC<SelectedItemsPerPageProps> = ({ sele
         <Select<ItemsPerPageOption, false, GroupBase<ItemsPerPageOption>>
             options={optionsItemsPerPage}
             placeholder={selectedItemsPerPage.toString()}
-            menuPlacement="auto"
+            menuPlacement="top"
             isSearchable={false}
             styles={customStyles}
             components={{

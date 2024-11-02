@@ -17,9 +17,15 @@ export const TableFooter: React.FC<TableFooterProps> = ({ data, selectedItemsPer
 
     return (
         <Box sx={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            textAlign: "center", padding: "8px", position: 'sticky', bottom: 0,
-            borderTop: `1px solid ${theme.palette.gray.G400}`, backgroundColor: theme.palette.gray.G100,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            textAlign: "center",
+            padding: "8px",
+            position: 'fixed',
+            bottom: 0, 
+            borderTop: `1px solid ${theme.palette.gray.G400}`,
+            backgroundColor: theme.palette.gray.G100,
         }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: "12px", color: theme.palette.primary.dark}}>
                 <div>Items shown: 

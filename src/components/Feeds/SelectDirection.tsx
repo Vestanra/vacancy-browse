@@ -1,6 +1,7 @@
 import { useTheme } from "@emotion/react";
 import sprite from "../../images/svg/sprite.svg";
 import { SelectDirectionProps } from "../helpers/types";
+
 export const SelectDirection: React.FC<SelectDirectionProps> = ({setParams, sortBy}) => {
     const theme: any = useTheme();   
     const handleClick = () => {

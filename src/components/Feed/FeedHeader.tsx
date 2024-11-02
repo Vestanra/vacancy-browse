@@ -25,12 +25,7 @@ export const FeedHeader: React.FC<FeedHeaderProps> = ({ handleClick, title }) =>
             <Button
                 component="button"
                 onClick={handleClick}
-                sx={{
-                    width: '278px', textTransform: 'none', height: '48px', textAlign: 'center',
-                    color: theme.palette.gray.G800,
-                    border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px',
-                    '&:hover': { backgroundColor: theme.palette.blue.B100, },
-                }}
+                sx={{ width: '278px'}}
             >
                 <svg width={24} height={24} color={theme.palette.gray.G800}><use href={`${sprite}#send`} /></svg>
                 <span style={{ fontSize: "16px", fontWeight: "500", marginLeft: "8px" }}>Save & Generate response</span>
