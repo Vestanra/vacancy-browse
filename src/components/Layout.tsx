@@ -11,7 +11,7 @@ import { Loader } from "./Loader";
 export const Layout: React.FC = () => {
     const theme: any = useTheme();
     const { toggleTheme, themeMode } = useThemeContext();
-    const { isError, isLoading } = useFeedsData();
+    const { isError, isLoading, error } = useFeedsData();
     const [isSidebar, setIsSidebar] = useState(true);
 
     const handleSideBar = () => {
@@ -22,24 +22,24 @@ export const Layout: React.FC = () => {
         <div >
             {isLoading ? <Loader />
                 : isError
-                    ? (<div>Error: {isError}</div>)
+                    ? (<div>Error: {error}</div>)
                     :
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: theme.palette.gray.G100 }}>
                         <Box sx={{ display: "flex", width: "1440px", }}>
                             {isSidebar && <Sidebar />}
                             <div style={{ margin: "0 auto", width: "1120px" }}>
                                 <Box sx={{ display: "flex", justifyContent: "space-between", padding: '24px 20px' }}>
-                                    <div onClick={handleSideBar}>
+                                    <button onClick={handleSideBar}>
                                         {isSidebar
                                             ? <svg width={24} height={24} color={theme.palette.gray.G800}><use href={`${sprite}#collapse-menu`} /></svg>
                                             : <svg width={24} height={24} color={theme.palette.gray.G800}><use href={`${sprite}#lines`} /></svg>
                                         }
-                                    </div>
-                                    <div onClick={toggleTheme}>
+                                    </button>
+                                    <button onClick={toggleTheme}>
                                         {themeMode === "light"
                                             ? <svg width={24} height={24} ><use href={`${sprite}#dark-mode`} /></svg>
                                             : <svg width={24} height={24} ><use href={`${sprite}#light-mode`} /></svg>}
-                                    </div>
+                                    </button>
                                 </Box>
                                 <Outlet />
                             </div>

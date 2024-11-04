@@ -101,12 +101,11 @@ export const Login = () => {
                             input: {
                                 endAdornment: passwordValue &&
                                     <InputAdornment position="end">
-                                        <Button
-                                            onClick={handlePasswordToggle}
-                                            sx={{ minWidth: '24px', padding: '0', }}>
+                                        <button
+                                            onClick={handlePasswordToggle}>
                                             <RemoveRedEyeIcon
                                                 sx={{ color: theme.palette.primary.dark }} />
-                                        </Button>
+                                        </button>
                                     </InputAdornment>
                             },
                             htmlInput: {

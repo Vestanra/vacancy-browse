@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, PaletteOptions } from "@mui/material";
-import { ThemeProvider } from "@mui/system";
+import { border, ThemeProvider } from "@mui/system";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import frameLight from "../../../images/png/frame-light.png";
@@ -148,7 +148,12 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               body: {
                 backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F', 
                 minHeight: '100vh', 
-              },             
+              },
+              button: {
+                border: "none",
+                backgroundColor: "transparent",
+                cursor: "pointer",
+              }
             },
          },
          MuiButton: {

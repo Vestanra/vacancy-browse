@@ -1,8 +1,8 @@
-.css-qr46ko::-webkit-scrollbar {
+.custom-scrollbar::-webkit-scrollbar {
     width: 4px;
 }
 
-.css-qr46ko::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb {
     background: #B0B3B8;
     border-radius: 4px;
 }
