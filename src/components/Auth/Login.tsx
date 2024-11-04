@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import sprite from "../images/svg/sprite.svg";
-import { useAppSelector, selectError, selectLoading } from "../redux/selectors";
+import sprite from "../../images/svg/sprite.svg";
 import { Box, Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { inputStyles } from "./helpers/stylesHelper";
-import {CustomAlert} from "./CustomAlert"
 import { SubmitHandler, useForm } from "react-hook-form";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
+import { selectError, selectLoading, useAppSelector } from "../../redux/selectors";
+import { CustomAlert } from "../helpers/styles/CustomAlert";
+import { inputStyles } from "../helpers/styles/stylesHelper";
 
 interface MyForm {
     email: string;
@@ -32,15 +32,18 @@ export const Login = () => {
     }, [errorMessage])
     
     const handlePasswordToggle = () => {
-        setPasswordVisible(!passwordVisible);        
+        setPasswordVisible(!passwordVisible);
     };
 
-    const submit: SubmitHandler<MyForm> = ({email, password}) => {
+    const submit: SubmitHandler<MyForm> = ({ email, password }) => {
         login({ email, password });
     };
     
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', color: theme.palette.gray.G800, }}>
+        <Box sx={{
+            display: 'flex', justifyContent: 'center', color: theme.palette.gray.G800,
+            backgroundColor: theme.palette.primary.main, height: "100vh"
+        }}>
             <Box sx={{ padding: '96px 60px', width: '440px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', gap: '12px', justifyContent: 'center', alignItems: 'center' }}>
                     <svg width={32} height={32}><use href={`${sprite}#logo`} /></svg>
@@ -48,23 +51,12 @@ export const Login = () => {
                 </Box>
                 <Typography variant="h2" sx={{ fontSize: '32px', fontWeight: '500', margin: '40px 0', textAlign: 'center' }}>Login</Typography>
                 {error &&
-                    <CustomAlert severity="error" sx={{
-                        width: '320px', height: '64px', padding: '0 0 0 12px', marginBottom: '16px',
-                        fontSize: '16px', fontWeight: '600',
-                        borderRadius: '8px', color: theme.palette.primary.dark, backgroundColor: theme.palette.alertError.E200,
-                    }} >
-                        Error<Typography sx={{ fontSize: '14px', fontWeight: '400', }}>{error}</Typography>
-                    </CustomAlert>}
+                    <CustomAlert severity="error" title={error} width="320px" />}
                 <Box sx={{ display: 'flex', justifyContent: 'center', }}>
                     <Button
                         type="button"
                         onClick={() => setError("Please enter email and password.")}
-                        sx={{
-                            width: '320px', textTransform: 'none', height: '48px', 
-                            color: theme.palette.gray.G800, textAlign: 'center',
-                            border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px',
-                            '&:hover': {backgroundColor: theme.palette.blue.B100,},
-                        }}>
+                        sx={{width: '320px', }}>
                         <svg width={24} height={24}>
                             <use href={`${sprite}#microsoft-logo`} />
                         </svg>
@@ -81,55 +73,60 @@ export const Login = () => {
                     onSubmit={handleSubmit(submit)}
                     sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <TextField
-                        {...register("email", {required: true})}
+                        {...register("email", { required: true })}
                         type="email"
+                        name="email"
                         placeholder="Email"
                         label="Email"
                         variant="filled"
-                        fullWidth                        
+                        fullWidth
                         sx={{ ...inputStyles, border: `1px solid ${theme.palette.gray.G400}`, marginBottom: '16px' }}
+                        slotProps={{
+                            htmlInput: {
+                                autoComplete: "username" 
+                            }
+                        }}
 
                     />
                     <TextField
-                        {...register("password", {required: true})}
+                        {...register("password", { required: true })}
                         type={passwordVisible ? 'text' : 'password'}
                         placeholder="Password"
                         label="Password"
+                        name="password"
                         variant="filled"
-                        fullWidth                        
+                        fullWidth
                         sx={{ ...inputStyles, border: `1px solid ${theme.palette.gray.G400}`, }}
                         slotProps={{
                             input: {
                                 endAdornment: passwordValue &&
                                     <InputAdornment position="end">
-                                        <Button
-                                            onClick={handlePasswordToggle}
-                                            sx={{ minWidth: '24px', padding: '0', }}>
+                                        <button
+                                            onClick={handlePasswordToggle}>
                                             <RemoveRedEyeIcon
                                                 sx={{ color: theme.palette.primary.dark }} />
-                                        </Button>
+                                        </button>
                                     </InputAdornment>
+                            },
+                            htmlInput: {
+                                autoComplete: "current-password"
                             }
                         }}
                     />
                     <Button component="button"
                         type="submit"
                         disabled={isLoading}
-                        sx={{
-                            width: '320px', marginTop: '16px', textTransform: 'none', height: '48px', textAlign: 'center',
-                            color: theme.palette.gray.G800,
-                            border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px',
-                            '&:hover': {backgroundColor: theme.palette.blue.B100,},
-                        }}>Log in
+                        sx={{ width: '320px', marginTop: '16px', }}>
+                        Log in
                     </Button>
                 </Box>
             </Box>
-            <Box
+            <Box aria-hidden="true"
                 sx={{
                     backgroundImage: `url(${theme.palette.backgroundImage})`,
                     backgroundSize: 'cover', backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    height: '100vh', maxWidth: '1000px', width: '100%', display: { xs: 'none', lg: 'block' },
+                    height: '100vh', maxWidth: '1000px', width: '100%',
                 }} />
         </Box>
     );
