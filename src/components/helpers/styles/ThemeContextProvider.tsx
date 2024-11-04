@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, PaletteOptions } from "@mui/material";
-import { border, ThemeProvider } from "@mui/system";
+import { margin, padding, ThemeProvider } from "@mui/system";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import frameLight from "../../../images/png/frame-light.png";
@@ -153,6 +153,11 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
                 border: "none",
                 backgroundColor: "transparent",
                 cursor: "pointer",
+              },
+              ul: {
+                listStyleType: 'none',
+                padding: "0",
+                margin: "0",
               }
             },
          },

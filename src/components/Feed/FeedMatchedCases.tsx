@@ -20,7 +20,7 @@ export const FeedMatchedCases: React.FC<FeedInfoProps> = ({ data, matchedItem, s
     };
 
     return (
-        <ul style={{ listStyleType: 'none', padding: "0 0 8px 0", margin: "0", fontSize: "14px", }}>
+        <ul style={{ fontSize: "14px", }}>
             {data
                 && data.map((el: any) => (
                     <li key={el.docId} style={{

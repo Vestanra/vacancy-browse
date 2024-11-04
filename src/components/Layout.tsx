@@ -22,7 +22,7 @@ export const Layout: React.FC = () => {
         <div >
             {isLoading ? <Loader />
                 : isError
-                    ? (<div>Error: {error}</div>)
+                    ? (<div>Error: {error.message}</div>)
                     :
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: theme.palette.gray.G100 }}>
                         <Box sx={{ display: "flex", width: "1440px", }}>
