@@ -10,17 +10,27 @@ const api = axios.create({
     }
 });
 
-export const getChats = async (): Promise<IChatItemsArray | void> => {
-    let accessToken = getAccessToken();
-    const url = `${BaseRoutes.V1}/chats`;
-
-    const response = await api.get(
-        url,
-        {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
+api.interceptors.request.use(
+    (config) => {
+        const accessToken = getAccessToken();
+        if (accessToken) {
+            config.headers.Authorization = `Bearer ${accessToken}`;
         }
-    );
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+export const getChats = async (): Promise<IChatItemsArray | void> => {
+    const url = `${BaseRoutes.V1}/chats`;
+    const response = await api.get(url);
     return response.data.data;
 };
+
+export const getChatById = async (id: string) => {
+    const url = `${BaseRoutes.V1}/chats/${id}`;
+    const response = await api.get(url);
+    return response.data.data;
+}

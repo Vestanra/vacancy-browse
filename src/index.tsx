@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute children={<FeedPage />} />
       },
       {
-        path: "feeds/chat",
+        path: "chats/:id",
         element: <PrivateRoute children={<ChatPage />} />
       },
     ]

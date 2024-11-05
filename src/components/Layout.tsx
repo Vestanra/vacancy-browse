@@ -1,11 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useThemeContext } from "../components/helpers/styles/ThemeContextProvider";
 import sprite from "../images/svg/sprite.svg";
 import { useTheme } from "@emotion/react";
 import { Box } from "@mui/material";
 import { useFeedsData } from "./hooks/useFeedsQuery";
 import { Sidebar } from "./Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 
 export const Layout: React.FC = () => {
@@ -13,11 +13,19 @@ export const Layout: React.FC = () => {
     const { toggleTheme, themeMode } = useThemeContext();
     const { isError, isLoading, error } = useFeedsData();
     const [isSidebar, setIsSidebar] = useState(true);
+    const navigate = useNavigate();
 
     const handleSideBar = () => {
         setIsSidebar(!isSidebar)
-    }
+    };
 
+    // useEffect(() => {
+    //     if (isError && error?.status === 401) { 
+    //         navigate('/login'); 
+    //     }
+    // }, [isError, error, navigate]);
+
+    
     return (
         <div >
             {isLoading ? <Loader />

@@ -112,3 +112,7 @@ export interface FeedInfoProps {
 }
 
 export type IChatItemsArray = IChatItem[];
+
+export interface PopoverButtonsProps {
+  setIsRenameAction: (prev: any) => void;
+};

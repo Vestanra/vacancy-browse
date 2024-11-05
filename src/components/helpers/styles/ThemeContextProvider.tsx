@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, PaletteOptions } from "@mui/material";
-import { margin, padding, ThemeProvider } from "@mui/system";
+import { ThemeProvider } from "@mui/system";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import frameLight from "../../../images/png/frame-light.png";
@@ -98,7 +98,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               E200: '#DCEDF5',
               E600: '#1F7099',
             },
-            backgroundImage: frameLight,               
+            backgroundImage: frameLight,
           }
           :
           {
@@ -137,44 +137,58 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               E200: '#2B373D',
               E600: '#52A3CC',
             },
-            backgroundImage: frameDark, 
+            backgroundImage: frameDark,
           }
         )
        
       } as CustomPaletteOptions,
-       components: {
-          MuiCssBaseline: {
-            styleOverrides: {
-              body: {
-                backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F', 
-                minHeight: '100vh', 
-              },
-              button: {
-                border: "none",
-                backgroundColor: "transparent",
-                cursor: "pointer",
-              },
-              ul: {
-                listStyleType: 'none',
-                padding: "0",
-                margin: "0",
-              }
+      components: {
+        MuiCssBaseline: {
+          styleOverrides: {
+            body: {
+              backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F',
+              minHeight: '100vh',
             },
-         },
-         MuiButton: {
-                styleOverrides: {
-                  root: {
-                    textTransform: 'none',
-                    color: themeMode === 'light' ? '#252733' : '#EBECF0',
-                    border: `2px solid ${themeMode === 'light' ? '#ABBDE0' : '#3760AD'}`,
-                    borderRadius: '8px',
-                    '&:hover': { backgroundColor: themeMode === 'light' ? '#F0F5FF' : '#181B29FF', },
-                    height: '48px',
-                    textAlign: 'center',
-                    },
-                  },
+            button: {
+              border: "none",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+            },
+            ul: {
+              listStyleType: 'none',
+              padding: "0",
+              margin: "0",
+            },
+            input: {
+               '&:focus': {
+                outline: 'none', 
               },
+            }
+          },
         },
+        MuiPopover: {
+          styleOverrides: {
+            paper: {
+              boxShadow: '0px 4px 16px -2px rgba(0, 0, 0, 0.06)',
+              border: `1px solid ${ themeMode === 'light' ? '#D5D7DB' : '#414752'}`,
+              borderRadius: '12px',
+            },
+          },
+        },
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              textTransform: 'none',
+              color: themeMode === 'light' ? '#252733' : '#EBECF0',
+              border: `2px solid ${themeMode === 'light' ? '#ABBDE0' : '#3760AD'}`,
+              borderRadius: '8px',
+              '&:hover': { backgroundColor: themeMode === 'light' ? '#F0F5FF' : '#181B29FF', },
+              height: '48px',
+              textAlign: 'center',
+            },
+          },
+        },
+      },
       typography: {
         fontFamily: `'Poppins', sans-serif`,
       },

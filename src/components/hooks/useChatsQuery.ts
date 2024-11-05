@@ -1,9 +1,9 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { selectIsAuth, useAppSelector } from "../../redux/selectors";
-import { FeedsParams, IChatItemsArray } from "../helpers/types";
+import { IChatItemsArray } from "../helpers/types";
 import { useChats } from "./useChats";
 
-export const useChatsQuery = (params: FeedsParams = {}) => {
+export const useChatsQuery = () => {
     const { getAllChats } = useChats();
     const isAuth = useAppSelector(selectIsAuth);
     
@@ -13,4 +13,17 @@ export const useChatsQuery = (params: FeedsParams = {}) => {
         enabled: isAuth,
     });
     return { data, isLoading, isSuccess, isError, error };
+};
+
+export const useChatByIdQuery = (id: string) => {
+    const { getChat } = useChats();
+    const isAuth = useAppSelector(selectIsAuth);
+
+    const { data, isLoading, isSuccess, isError, error } = useQuery({
+        queryKey: ['chat', id],
+        queryFn: () => getChat(id),
+        enabled: isAuth && Boolean(id),
+    });
+
+    return { data, isLoading, isSuccess, isError, error }
 };

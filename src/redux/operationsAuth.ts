@@ -30,7 +30,6 @@ export const refreshUser = createAsyncThunk<any, void, { state: RootState, rejec
             localStorage.setItem('token', JSON.stringify(data.access));
             return data
         } catch (error: any) {
-            console.log("error refresh")
             localStorage.clear();
             return thunkAPI.rejectWithValue(error.message)
         }
