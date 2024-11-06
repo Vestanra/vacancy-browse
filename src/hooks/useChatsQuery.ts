@@ -3,6 +3,7 @@ import { selectIsAuth, useAppSelector } from "../redux/selectors";
 import { IChatItemsArray } from "../components/helpers/types";
 import { useChats } from "./useChats";
 import { ICreateChatRequest } from "../interfaces-submodule/interfaces/dto/chat/dto/icreate-chat-request.interface";
+import { useNavigate } from "react-router-dom";
 
 export const useChatsQuery = () => {
     const { getAllChats } = useChats();
@@ -32,11 +33,15 @@ export const useChatByIdQuery = (id: string) => {
 export const useCreateChatQuery = () => {
     const queryClient = useQueryClient();
     const { createChat } = useChats();
+    const navigate = useNavigate();
 
     return useMutation({
         mutationFn: (params: ICreateChatRequest) => createChat(params),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['chats',] })
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ['chats',] });
+            if (data?.id) {
+                navigate(`chats/${data.id}`);
+            }
         },
     })
 };

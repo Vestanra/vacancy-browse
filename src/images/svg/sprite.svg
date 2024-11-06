@@ -92,6 +92,18 @@
         <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 20" id="logout">
             <path fill="currentColor" fill-rule="evenodd" d="M3 0a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1h-2v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1h2V3a3 3 0 0 0-3-3H3Zm8.707 5.293a1 1 0 1 0-1.414 1.414L12.586 9H5a1 1 0 0 0 0 2h7.586l-2.293 2.293a1 1 0 1 0 1.414 1.414L16.414 10l-4.707-4.707Z" clip-rule="evenodd"></path>
         </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="subtract">
+            <path fill="currentColor" fill-rule="evenodd" d="M3 0a3 3 0 0 0-3 3v18a3 3 0 0 0 3 3h18a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3Zm17 6v1c-1 0-2 1-2 2h-1c0-1-1-2-2-2V6c1 0 2-1 2-2h1c0 1 1 2 2 2ZM4 14v1.002c1.325 0 2.252.328 2.914.77.668.445 1.126 1.045 1.442 1.677.317.635.481 1.283.564 1.78A6.362 6.362 0 0 1 9 20v.002l1-.001h1v-.034c.002-.032.004-.084.01-.153.009-.137.03-.34.07-.586a6.38 6.38 0 0 1 .564-1.78c.316-.632.774-1.232 1.442-1.678.662-.44 1.589-.77 2.914-.77v-2c-1.325 0-2.252-.328-2.914-.769-.668-.445-1.126-1.046-1.442-1.677a6.38 6.38 0 0 1-.564-1.78 6.36 6.36 0 0 1-.08-.772V8H9v.035a6.365 6.365 0 0 1-.08.739 6.375 6.375 0 0 1-.564 1.78c-.316.63-.774 1.232-1.442 1.677-.662.441-1.589.77-2.914.77V14Z" clip-rule="evenodd"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="chat-avatar">
+            <path fill="currentColor" fill-rule="evenodd" d="M22.279 18.196A11.945 11.945 0 0 0 24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 2.267.629 4.387 1.721 6.196A6.662 6.662 0 0 1 6.667 16h10.666a6.667 6.667 0 0 1 4.946 2.196Zm-1.675 2.168a4.005 4.005 0 0 0-3.27-1.697H6.666a4 4 0 0 0-3.271 1.697A11.965 11.965 0 0 0 12 24c3.375 0 6.424-1.393 8.604-3.636ZM12 10.668a2.667 2.667 0 1 0 0-5.334 2.667 2.667 0 0 0 0 5.334Zm0 2.666a5.333 5.333 0 1 0 0-10.666 5.333 5.333 0 0 0 0 10.666Z" clip-rule="evenodd"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 20" id="chat-send">
+            <path  stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10 1.234 2.625c-.142-.38-.05-.81.238-1.097v0a1.036 1.036 0 0 1 1.196-.194L20 10 2.668 18.666c-.399.2-.88.121-1.196-.194v0a1.036 1.036 0 0 1-.238-1.097L4 10Zm0 0h7"></path>
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" id="icon">
+            <path fill="currentColor" fill-rule="evenodd" d="M13.707 1.707A1 1 0 0 0 12.293.293L7 5.586 1.707.293A1 1 0 0 0 .293 1.707L5.586 7 .293 12.293a1 1 0 1 0 1.414 1.414L7 8.414l5.293 5.293a1 1 0 0 0 1.414-1.414L8.414 7l5.293-5.293Z" clip-rule="evenodd"></path>
+        </symbol>
     </defs>
 </svg>
 

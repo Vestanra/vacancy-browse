@@ -160,8 +160,8 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               margin: "0",
             },
             input: {
-               '&:focus': {
-                outline: 'none', 
+              '&:focus': {
+                outline: 'none',
               },
             }
           },
@@ -170,7 +170,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
           styleOverrides: {
             paper: {
               boxShadow: '0px 4px 16px -2px rgba(0, 0, 0, 0.06)',
-              border: `1px solid ${ themeMode === 'light' ? '#D5D7DB' : '#414752'}`,
+              border: `1px solid ${themeMode === 'light' ? '#D5D7DB' : '#414752'}`,
               borderRadius: '12px',
             },
           },

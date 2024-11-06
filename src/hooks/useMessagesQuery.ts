@@ -7,13 +7,13 @@ export const useMessagesQuery = (id: string) => {
     const isAuth = useAppSelector(selectIsAuth);
     const { getMessagesById } = useMessage();
 
-    const { data, isLoading, isSuccess, isError, error, refetch } = useQuery({
+    const { data, isLoading, isSuccess, isError, error, refetch, isFetching } = useQuery({
         queryKey: ['messages', id],
         queryFn: () => getMessagesById(id),
         enabled: isAuth && Boolean(id),
     });
 
-    return { data, isLoading, isSuccess, isError, error, refetch }
+    return { data, isLoading, isSuccess, isError, error, refetch, isFetching }
 };
 
 export const useSendMessageQuery = () => {

@@ -68,13 +68,13 @@ export const KeywordSelect: React.FC<KeywordSelectProps> =
 
             let content;
             if (notAllSelect) {
-                content = <svg width={20} height={20}><use href={`${sprite}#not-select`} /></svg>
+                content = <svg width={20} height={20} style={{flexShrink: "0"}}><use href={`${sprite}#not-select`} /></svg>
             } else {
-                content = <Box sx={{ width: "20px", height: "20px", border: `2px solid ${theme.palette.gray.G400}`, borderRadius: "2px" }}></Box>
+                content = <Box sx={{ width: "20px", height: "20px", border: `2px solid ${theme.palette.gray.G400}`, borderRadius: "2px", flexShrink: "0" }}></Box>
             }
 
             if (isSelected) {
-                content = <svg width={20} height={20}><use href={`${sprite}#is-select`} /></svg>
+                content = <svg width={20} height={20} style={{flexShrink: "0"}}><use href={`${sprite}#is-select`} /></svg>
             }
 
             return (
