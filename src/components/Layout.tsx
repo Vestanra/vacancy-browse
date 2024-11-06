@@ -1,37 +1,25 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet  } from "react-router-dom";
 import { useThemeContext } from "../components/helpers/styles/ThemeContextProvider";
 import sprite from "../images/svg/sprite.svg";
 import { useTheme } from "@emotion/react";
 import { Box } from "@mui/material";
-import { useFeedsData } from "./hooks/useFeedsQuery";
 import { Sidebar } from "./Sidebar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Loader } from "./Loader";
 
 export const Layout: React.FC = () => {
     const theme: any = useTheme();
     const { toggleTheme, themeMode } = useThemeContext();
-    const { isError, isLoading, error } = useFeedsData();
     const [isSidebar, setIsSidebar] = useState(true);
-    const navigate = useNavigate();
 
     const handleSideBar = () => {
         setIsSidebar(!isSidebar)
     };
 
-    // useEffect(() => {
-    //     if (isError && error?.status === 401) { 
-    //         navigate('/login'); 
-    //     }
-    // }, [isError, error, navigate]);
-
     
     return (
         <div >
-            {isLoading ? <Loader />
-                : isError
-                    ? (<div>Error: {error.message}</div>)
-                    :
+            {
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: theme.palette.gray.G100 }}>
                         <Box sx={{ display: "flex", width: "1440px", }}>
                             {isSidebar && <Sidebar />}

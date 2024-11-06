@@ -1,6 +1,6 @@
-import { refreshUser } from "../../redux/operationsAuth";
-import { useAppDispatch } from "../../redux/store";
-import { updateFeed } from "../helpers/apiService";
+import { refreshUser } from "../redux/operationsAuth";
+import { useAppDispatch } from "../redux/store";
+import { updateFeed } from "../services/apiService";
 
 export const useUpdateFeed = () => {
     const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { IUpworkResponseListFeedsDto } from "../../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
+import { IUpworkResponseListFeedsDto } from "../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
 import { useFeeds } from "./useFeeds";
-import { selectIsAuth, useAppSelector } from "../../redux/selectors";
-import { FeedsParams } from "../helpers/types";
-import { defaultParams } from "../helpers/defultValue/defaultParamas";
+import { selectIsAuth, useAppSelector } from "../redux/selectors";
+import { FeedsParams } from "../components/helpers/types";
+import { defaultParams } from "../components/helpers/defultValue/defaultParamas";
 
 export const useFeedsData = (params: FeedsParams = {}) => {
     const getAllFeeds = useFeeds();

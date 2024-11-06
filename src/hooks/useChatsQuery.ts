@@ -1,0 +1,66 @@
+import { useMutation, useQuery, useQueryClient, UseQueryResult } from "@tanstack/react-query";
+import { selectIsAuth, useAppSelector } from "../redux/selectors";
+import { IChatItemsArray } from "../components/helpers/types";
+import { useChats } from "./useChats";
+import { ICreateChatRequest } from "../interfaces-submodule/interfaces/dto/chat/dto/icreate-chat-request.interface";
+
+export const useChatsQuery = () => {
+    const { getAllChats } = useChats();
+    const isAuth = useAppSelector(selectIsAuth);
+    
+    const { data, isLoading, isSuccess, isError, error }: UseQueryResult<IChatItemsArray, any> = useQuery({
+        queryKey: ['chats', ],
+        queryFn: () => getAllChats(),
+        enabled: isAuth,
+    });
+    return { data, isLoading, isSuccess, isError, error };
+};
+
+export const useChatByIdQuery = (id: string) => {
+    const { getChat } = useChats();
+    const isAuth = useAppSelector(selectIsAuth);
+
+    const { data, isLoading, isSuccess, isError, error } = useQuery({
+        queryKey: ['chat', id],
+        queryFn: () => getChat(id),
+        enabled: isAuth && Boolean(id),
+    });
+
+    return { data, isLoading, isSuccess, isError, error }
+};
+
+export const useCreateChatQuery = () => {
+    const queryClient = useQueryClient();
+    const { createChat } = useChats();
+
+    return useMutation({
+        mutationFn: (params: ICreateChatRequest) => createChat(params),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['chats',] })
+        },
+    })
+};
+
+export const useUpdateChatQuery = () => {
+    const queryClient = useQueryClient();
+    const { updateChat } = useChats();
+
+    return useMutation({
+        mutationFn: ({ id, params }: { id: number, params: ICreateChatRequest }) => updateChat(id, params),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['chats',] })
+        },
+    })
+};
+
+export const useDeleteChatQuery = () => {
+    const queryClient = useQueryClient();
+    const { deleteChat } = useChats();
+
+    return useMutation({
+        mutationFn: ((id: number) => deleteChat(id)),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['chats',] })
+        }
+    })
+};

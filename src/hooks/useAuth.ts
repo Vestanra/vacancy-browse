@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { logIn, refreshUser, logOut } from "../../redux/operationsAuth";
-import { useAppDispatch } from "../../redux/store";
+import { logIn, refreshUser, logOut } from "../redux/operationsAuth";
+import { useAppDispatch } from "../redux/store";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch();

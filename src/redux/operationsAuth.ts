@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ILoginRequestDTO } from "../interfaces-submodule/interfaces/dto/auth/iadmin-login-request.interface";
 import { ILoginResponseDTO } from "../interfaces-submodule/interfaces/dto/auth/ilogin-response.interfaces";
 import { RootState } from "./store";
-import { logInRequest, refreshTokenRequest } from "../components/helpers/apiService";
-import { getRefreshToken } from "../components/hooks/getTokens";
+import { logInRequest, refreshTokenRequest } from "../services/apiService";
+import { getRefreshToken } from "../components/helpers/functions/getTokens";
 
 export const logIn = createAsyncThunk<ILoginResponseDTO, ILoginRequestDTO, { rejectValue: string }>(
     "auth/login",

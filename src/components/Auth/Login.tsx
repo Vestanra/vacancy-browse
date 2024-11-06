@@ -4,7 +4,7 @@ import { Box, Button, InputAdornment, TextField, Typography } from "@mui/materia
 import { useTheme } from "@emotion/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { selectError, selectLoading, useAppSelector } from "../../redux/selectors";
 import { CustomAlert } from "../helpers/styles/CustomAlert";
 import { inputStyles } from "../helpers/styles/stylesHelper";

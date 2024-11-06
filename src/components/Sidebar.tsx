@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Box, Button, Popover, } from "@mui/material";
 import sprite from "../images/svg/sprite.svg";
 import { useNavigate } from "react-router-dom";
-import { useChatsQuery } from "./hooks/useChatsQuery";
+import { useChatsQuery, useCreateChatQuery, useDeleteChatQuery, useUpdateChatQuery } from "../hooks/useChatsQuery";
 import { SidebarFooter } from "./SidebarFooter";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,29 +14,45 @@ export const Sidebar = () => {
     const { data } = useChatsQuery();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [isRenameAction, setIsRenameAction] = useState(false);    
-    const [selectedItem, setSelectedItem] = useState<number>(0);
+    const [id, setId] = useState<number>(0);
 
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, getValues } = useForm();
+    const { mutate: createChat } = useCreateChatQuery();
+    const { mutate: updateChat } = useUpdateChatQuery();
+    const { mutate: deleteChat } = useDeleteChatQuery();
 
     const openPopover = (event: React.MouseEvent<HTMLElement>, id: number, name: string) => {
         setAnchorEl(event.currentTarget);
-        setSelectedItem(id);
+        setId(id);
         setIsRenameAction(false);
         setValue("chatName", name)
     };
     
     const closePopover = () => {
         setAnchorEl(null);
-        setSelectedItem(0);   
+        setId(0);   
         setValue("chatName", "");
     };
 
     const handleClick = () => {
-        console.log(data)
+        createChat({name: "new chat"})
     };
 
-    const handleNewChatName = (data: any) => {
-        console.log(data)
+    const handleDelete = (id: number, ) => {
+        deleteChat(id);
+        closePopover();
+    }
+
+    const handleNewChatName = () => {
+        const newName = getValues("chatName");
+
+        if (!id || !newName || newName.trim() === "" || newName === data?.find((el) => el.id === id)?.name) {
+            closePopover();
+            return;
+        };
+
+        const params = { name: getValues("chatName") };
+        updateChat({ id, params });
         closePopover();
     };
 
@@ -69,7 +85,7 @@ export const Sidebar = () => {
                             alignItems: "center",
                             gap: "8px",
                             width: "288px",
-                            padding: "12px",
+                            padding: "6px 12px",
                             cursor: "pointer",
                             marginBottom: '2px',
                         }}>
@@ -84,7 +100,7 @@ export const Sidebar = () => {
                             style={{
                                 width: "36px",
                                 height: "36px",
-                                backgroundColor: selectedItem === el.id ? `${theme.palette.gray.G200}` : 'transparent',
+                                backgroundColor: id === el.id ? `${theme.palette.gray.G200}` : 'transparent',
                                 borderRadius: '8px',
                             }}
                             onClick={(e) => openPopover(e, el.id, el.name)}><svg width={4} height={18} color={theme.palette.gray.G800}><use href={`${sprite}#ellipsis`} /></svg></button>
@@ -134,7 +150,7 @@ export const Sidebar = () => {
                                     </form>
                                 </Box>
                                 :
-                                <PopoverButtons setIsRenameAction={ setIsRenameAction} />
+                                <PopoverButtons setIsRenameAction={ setIsRenameAction} id={id} handleDelete={handleDelete} />
                             }
                         </Popover>
                     </li>)

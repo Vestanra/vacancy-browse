@@ -3,7 +3,7 @@ import { Box, Button, Popover, } from "@mui/material"
 import { useLocation, useNavigate } from "react-router-dom";
 import sprite from "../images/svg/sprite.svg";
 import { useState } from "react";
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { selectUserName, useAppSelector } from "../redux/selectors";
 
 export const SidebarFooter = () => {
@@ -12,7 +12,9 @@ export const SidebarFooter = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const isFeedsPage = location.pathname === '/feeds';
+
     const { logout } = useAuth();
+
     const userName = useAppSelector(selectUserName);
 
     const openPopover = (event: React.MouseEvent<HTMLElement>) => {
@@ -30,6 +32,7 @@ export const SidebarFooter = () => {
                 position: 'fixed',
                 bottom: 0,
                 borderTop: `1px solid ${theme.palette.gray.G200}`,
+                backgroundColor: theme.palette.primary.main,
             }}>
             <Button
                 component="button"

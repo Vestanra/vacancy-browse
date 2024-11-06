@@ -115,4 +115,6 @@ export type IChatItemsArray = IChatItem[];
 
 export interface PopoverButtonsProps {
   setIsRenameAction: (prev: any) => void;
+  id: number;
+  handleDelete: (prev: any) => void;
 };

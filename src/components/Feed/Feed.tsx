@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFeedByIdQuery } from "../hooks/useFeedByIdQuery";
+import { useFeedByIdQuery } from "../../hooks/useFeedByIdQuery";
 import { FeedHeader } from "./FeedHeader";
 import { FeedSection } from "./FeedSection";
 import { FeedInfo } from "./FeedInfo";
@@ -8,7 +8,7 @@ import { FeedMatchedCases } from "./FeedMatchedCases";
 import { FeedMatchedBlogs } from "./FeedMatchedBlogs";
 import { Loader } from "../Loader";
 import { useState } from "react";
-import { useUpdateFeedQuery } from "../hooks/useUpdateFeedQuery";
+import { useUpdateFeedQuery } from "../../hooks/useUpdateFeedQuery";
 
 export const FeedById = () => {
     const { id } = useParams<{ id: string }>();

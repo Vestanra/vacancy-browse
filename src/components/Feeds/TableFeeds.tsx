@@ -1,4 +1,4 @@
-import { useFeedsData } from "../hooks/useFeedsQuery";
+import { useFeedsData } from "../../hooks/useFeedsQuery";
 import { IUpworkFeedItemDTO } from "../../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
