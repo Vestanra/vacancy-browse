@@ -28,7 +28,6 @@ export const TitleSelect: React.FC<TitleSelectProps> =
                             }
                         ],
                     }));
-                    console.log(`Final value: ${value}`);
                 }, 1000),
             [setCurrentPage, setParams, setSelectedKeyWords, setSelectedReview, setSelectedScore, setSelectedTitle]
         );

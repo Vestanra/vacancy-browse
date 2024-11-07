@@ -28,12 +28,7 @@ export const Sidebar = () => {
     const { mutate: deleteChat } = useDeleteChatQuery();
 
     const { id: currentChat } = useParams<{ id: string }>();
-
-  const isChatPage = location.pathname.startsWith('/chats/');
-
-  if (isChatPage && currentChat) {
-    console.log(`We are on the chat page with id: ${currentChat}`);
-  }
+    const isChatPage = location.pathname.startsWith('/chats/');
 
     const openPopover = (event: React.MouseEvent<HTMLElement>, id: number, name: string) => {
         setAnchorEl(event.currentTarget);
@@ -76,10 +71,6 @@ export const Sidebar = () => {
         updateChat({ id, params });
         closePopover();
     };
-
-    const handleNavigate = () => {
-
-    }
 
     return (
         <Box sx={{
