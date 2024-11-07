@@ -9,6 +9,7 @@ import { Loader } from "../Loader";
 import sprite from "../../images/svg/sprite.svg";
 import { useTheme } from "@emotion/react";
 import { Button, CustomTextarea, Form, FormWrap, Li, } from "../helpers/styles/ChatItem.styled";
+import { NotificationEvents } from "../../interfaces-submodule/enums/notification/notification-events.enum";
 
 export const ChatItem = () => {
     const { id } = useParams<{ id: string }>();
@@ -50,9 +51,8 @@ export const ChatItem = () => {
         };
 
         socket.on('connect', () => handleConnect(socket, requestBody));
-        socket.on('connect_error', (err) => { console.error('Помилка підключення:', err) });
         socket.on('disconnect', () => handleDisconnect(socket, requestBody));
-        socket.on("chat_response", () => {
+        socket.on(NotificationEvents.ChatResponse, () => {
             refetch();
         });
         

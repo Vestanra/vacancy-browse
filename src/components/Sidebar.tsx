@@ -1,5 +1,5 @@
 import { useTheme } from "@emotion/react";
-import { Box, Button, Modal, Popover, Typography, } from "@mui/material";
+import { Box, Button, Popover, } from "@mui/material";
 import sprite from "../images/svg/sprite.svg";
 import { useNavigate } from "react-router-dom";
 import { useChatsQuery, useCreateChatQuery, useDeleteChatQuery, useUpdateChatQuery } from "../hooks/useChatsQuery";
@@ -7,6 +7,7 @@ import { SidebarFooter } from "./SidebarFooter";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PopoverButtons } from "./PopoverButtons";
+import { ModalDelete } from "./ModalDelete";
 
 export const Sidebar = () => {
     const theme: any = useTheme();
@@ -37,15 +38,20 @@ export const Sidebar = () => {
         setValue("chatName", "");
     };
 
-    const handleClick = () => {
+    const handleCreateChat = () => {
         createChat({ name: "new chat" })
     };
 
-    const handleDelete = (id: number,) => {
-        // deleteChat(id);
+    const handleOpenModal = () => {
         closePopover();
         setIsModal(true);
-    }
+        setId(id);
+    };
+
+    const handleDelete = () => {
+        deleteChat(id);
+        setIsModal(false);
+    };
 
     const handleNewChatName = () => {
         const newName = getValues("chatName");
@@ -62,20 +68,17 @@ export const Sidebar = () => {
 
     return (
         <Box sx={{
-            display: "flex",
+            display: "flex", gap: "2px",
             alignItems: "center",
             flexDirection: "column",
-            width: "320px",
+            width: "320px", minHeight: "100vh", height: "auto",
             position: "relative",
             padding: "12px 16px",
             backgroundColor: theme.palette.primary.main,
-            height: "auto",
-            minHeight: "100vh",
-            gap: "2px",
         }}>
             <Button
                 component="button"
-                onClick={handleClick}
+                onClick={handleCreateChat}
                 sx={{ width: '288px', marginBottom: "12px" }}>
                 <svg width={24} height={24} color={theme.palette.gray.G800}><use href={`${sprite}#plus`} /></svg>
                 <span style={{ fontSize: "16px", fontWeight: "500", marginLeft: "8px" }}>New chat</span>
@@ -87,11 +90,9 @@ export const Sidebar = () => {
                             position: 'relative',
                             display: "flex", justifyContent: "space-between",
                             alignItems: "center",
-                            gap: "8px",
-                            width: "288px",
-                            padding: "6px 12px",
+                            width: "288px", gap: "8px",
+                            padding: "6px 12px", marginBottom: '2px',
                             cursor: "pointer",
-                            marginBottom: '2px',
                         }}>
                         <div onClick={() => navigate(`chats/${el.id}`)}
                             style={{
@@ -137,57 +138,38 @@ export const Sidebar = () => {
                                             name="chatName"
                                             type="text"
                                             style={{
-                                                width: "100%",
-                                                padding: "12px",
+                                                width: "100%", padding: "12px",
                                                 borderColor: theme.palette.primary.contrastText,
                                                 borderRadius: "8px",
+                                                fontSize: "16px"
                                             }}
                                         />
                                         <div style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-                                            <button type="button"
-                                                style={{ width: "100%", height: "36px", border: `2px solid ${theme.palette.blue.BA300}`, borderRadius: '8px', }}
-                                                onClick={closePopover}>Discard</button>
-                                            <button type="submit"
-                                                style={{ width: "100%", height: "36px", borderRadius: '8px', backgroundColor: theme.palette.primary.contrastText, color: theme.palette.primary.main, }}
-                                            >Save</button>
+                                            <Button type="button"
+                                                sx={{ height: "36px", width: "100%" }}
+                                                onClick={closePopover}>Discard</Button>
+                                            <Button type="submit"
+                                                sx={{
+                                                    height: "36px", width: "100%", backgroundColor: theme.palette.primary.contrastText, color: theme.palette.primary.main,
+                                                    "&:hover": { backgroundColor: theme.palette.primary.contrastText },
+                                                }}
+                                            >Save</Button>
                                         </div>
                                     </form>
                                 </Box>
                                 :
-                                <PopoverButtons setIsRenameAction={setIsRenameAction} id={id} handleDelete={handleDelete} />
+                                <PopoverButtons setIsRenameAction={setIsRenameAction} id={id} handleOpenModal={handleOpenModal} />
                             }
                         </Popover>
                     </li>)
                 }
             </ul>
-            <Modal
-                open={isModal}
-                onClose={() => setIsModal(false)}              
-                sx={{}}
-            >
-                <Box sx={{
-                    width: "570px", backgroundColor: theme.palette.primary.main,
-                    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-                    color: theme.palette.gray.G800, boxShadow: "0px 16px 40px 0px #00000029, 0px 2px 8px 0px #00000014", borderRadius: "24px", padding: "32px"
-                }}>
-                    <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                        <span style={{fontSize: "24px", fontWeight: "500px", }}>Delete chat</span>
-                        <button>
-                            <svg width={14} height={14} color={theme.palette.gray.G800}><use href={`${sprite}#icon`} /></svg>
-                        </button>
-                    </div> 
-                    <div style={{margin: "27px 0"}}>Are you sure you want to delete chat "{name}"?</div>
-                    <div>
-                        <Button sx={{height: "52px", width: "134px", marginRight: "16px"}}>No, Keep it</Button>
-                        <Button
-                            sx={{
-                                height: "52px", width: "134px",
-                                backgroundColor: theme.palette.primary.contrastText,
-                                color: theme.palette.primary.main,
-                                "&:hover": {backgroundColor: theme.palette.primary.contrastText },}}>Yes, Delete it</Button>
-                    </div>
-                </Box>
-            </Modal>
+            <ModalDelete
+                isModal={isModal}
+                setIsModal={setIsModal}
+                name={name}
+                handleDelete={handleDelete}
+            />
             <SidebarFooter />
         </Box>
     )

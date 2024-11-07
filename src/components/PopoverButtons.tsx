@@ -3,7 +3,7 @@ import sprite from "../images/svg/sprite.svg";
 import { useTheme } from "@emotion/react";
 import { PopoverButtonsProps } from "./helpers/types";
 
-export const PopoverButtons: React.FC<PopoverButtonsProps> = ({setIsRenameAction, id, handleDelete }) => {
+export const PopoverButtons: React.FC<PopoverButtonsProps> = ({setIsRenameAction, id, handleOpenModal }) => {
     const theme: any = useTheme();
     return (
         <Box sx={{ width: '288px', }}>
@@ -15,7 +15,7 @@ export const PopoverButtons: React.FC<PopoverButtonsProps> = ({setIsRenameAction
                 <span style={{ fontSize: "16px", fontWeight: "400", marginLeft: "8px" }}>Rename</span>
             </Button>
             <Button
-                onClick={() => handleDelete(id)}
+                onClick={handleOpenModal}
                 sx={{ width: '288px', border: "none", display: "flex", alignItems: "center", justifyContent: "left" }}
             >
                 <svg width={18} height={19} color={theme.palette.gray.G800}><use href={`${sprite}#delete`} /></svg>

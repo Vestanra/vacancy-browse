@@ -8,6 +8,7 @@ export enum SortDirection {
   Ascending = "asc",
   Descending = "desc",
 }
+//Feeds
 
 export interface FeedsParams {
   pageSize?: number;
@@ -103,18 +104,29 @@ export interface SelectedItemsPerPageProps {
 export interface ItemsPerPageOption {
     value: number; 
     label: string;
-}
+};
 
 export interface FeedInfoProps {
     data: any; 
     setMatchedItem: (prev: any) => void;
     matchedItem: string[];
-}
+};
 
-export type IChatItemsArray = IChatItem[];
+//Sidebar
 
 export interface PopoverButtonsProps {
   setIsRenameAction: (prev: any) => void;
   id: number;
-  handleDelete: (prev: any) => void;
+  handleOpenModal: (prev: any) => void;
 };
+
+export interface ModalDeleteProps {
+  name: string;
+  isModal: boolean; 
+  setIsModal: (prev: any) => void; 
+  handleDelete: (prev: any) => void; 
+};
+
+//chat
+
+export type IChatItemsArray = IChatItem[];
