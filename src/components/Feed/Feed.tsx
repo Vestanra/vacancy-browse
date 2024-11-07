@@ -16,8 +16,8 @@ export const FeedById = () => {
     
     const { data, isLoading, } = useFeedByIdQuery(id as string);
     const [matchedBlogs, setMatchedBlogs] = useState([]);
-    const [matchedCases, setMatchedCases] = useState([]);
-
+    const [matchedCases, setMatchedCases] = useState([]);    
+    
     const handleClick = () => {
         if (matchedBlogs.length === 0 && matchedCases.length === 0) return;
         
@@ -44,6 +44,8 @@ export const FeedById = () => {
                     <FeedHeader
                         handleClick={handleClick}
                         title={data?.title}
+                        matchedCases={matchedCases}
+                        matchedBlogs={matchedBlogs}
                     />
                     <div>
                         <FeedSection title={"Project info"}>

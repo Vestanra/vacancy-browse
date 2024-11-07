@@ -112,6 +112,13 @@ export interface FeedInfoProps {
     matchedItem: string[];
 };
 
+export interface FeedHeaderProps {
+    handleClick: (e: any) => void;
+    title: string | any; 
+    matchedBlogs: string[];
+    matchedCases: string[];
+}
+
 //Sidebar
 
 export interface PopoverButtonsProps {
