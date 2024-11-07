@@ -2,8 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ILoginRequestDTO } from "../interfaces-submodule/interfaces/dto/auth/iadmin-login-request.interface";
 import { ILoginResponseDTO } from "../interfaces-submodule/interfaces/dto/auth/ilogin-response.interfaces";
 import { RootState } from "./store";
-import { logInRequest, refreshTokenRequest } from "../services/apiService";
+import { logInRequest, recoverUserRequest, refreshTokenRequest } from "../services/apiService";
 import { getRefreshToken } from "../components/helpers/functions/getTokens";
+import { IAccountDTO } from "../interfaces-submodule/interfaces/dto/account/iaccount.interface";
 
 export const logIn = createAsyncThunk<ILoginResponseDTO, ILoginRequestDTO, { rejectValue: string }>(
     "auth/login",
@@ -43,6 +44,18 @@ export const logOut = createAsyncThunk<void, void, { state: RootState }>(
             localStorage.clear();
         } catch (error: any) {
             return thunkAPI.rejectWithValue(error.message)
+        }
+    }
+);
+
+export const recoverUser = createAsyncThunk<IAccountDTO, void, {state: RootState}>(
+    "auth/recover",
+    async (_: void, thunkAPI) => {
+        try {
+            const data = await recoverUserRequest();
+            return data;
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );

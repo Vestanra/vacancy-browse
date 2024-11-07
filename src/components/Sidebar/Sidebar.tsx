@@ -1,28 +1,39 @@
 import { useTheme } from "@emotion/react";
 import { Box, Button, Popover, } from "@mui/material";
-import sprite from "../images/svg/sprite.svg";
-import { useNavigate } from "react-router-dom";
-import { useChatsQuery, useCreateChatQuery, useDeleteChatQuery, useUpdateChatQuery } from "../hooks/useChatsQuery";
-import { SidebarFooter } from "./SidebarFooter";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useChatsQuery, useCreateChatQuery, useDeleteChatQuery, useUpdateChatQuery } from "../../hooks/useChatsQuery";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PopoverButtons } from "./PopoverButtons";
 import { ModalDelete } from "./ModalDelete";
+import { SidebarFooter } from "./SidebarFooter";
+import sprite from "../../images/svg/sprite.svg";
 
 export const Sidebar = () => {
-    const theme: any = useTheme();
-    const navigate = useNavigate();
-    const { data } = useChatsQuery();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [isRenameAction, setIsRenameAction] = useState(false);
     const [id, setId] = useState<number>(0);
     const [name, setName] = useState<string>('');
     const [isModal, setIsModal] = useState<boolean>(false);
 
+    const theme: any = useTheme();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const { data } = useChatsQuery();
+
     const { register, handleSubmit, setValue, getValues } = useForm();
     const { mutate: createChat } = useCreateChatQuery();
     const { mutate: updateChat } = useUpdateChatQuery();
     const { mutate: deleteChat } = useDeleteChatQuery();
+
+    const { id: currentChat } = useParams<{ id: string }>();
+
+  const isChatPage = location.pathname.startsWith('/chats/');
+
+  if (isChatPage && currentChat) {
+    console.log(`We are on the chat page with id: ${currentChat}`);
+  }
 
     const openPopover = (event: React.MouseEvent<HTMLElement>, id: number, name: string) => {
         setAnchorEl(event.currentTarget);
@@ -66,6 +77,10 @@ export const Sidebar = () => {
         closePopover();
     };
 
+    const handleNavigate = () => {
+
+    }
+
     return (
         <Box sx={{
             display: "flex", gap: "2px",
@@ -93,6 +108,8 @@ export const Sidebar = () => {
                             width: "288px", gap: "8px",
                             padding: "6px 12px", marginBottom: '2px',
                             cursor: "pointer",
+                            borderRadius: "8px",
+                            backgroundColor: (isChatPage && (currentChat === el.id.toString())) ? `${theme.palette.gray.G200}` : 'transparent',
                         }}>
                         <div onClick={() => navigate(`chats/${el.id}`)}
                             style={{

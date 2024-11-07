@@ -1,10 +1,10 @@
 import { useTheme } from "@emotion/react";
 import { Box, Button, Popover, } from "@mui/material"
 import { useLocation, useNavigate } from "react-router-dom";
-import sprite from "../images/svg/sprite.svg";
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
-import { selectUserName, useAppSelector } from "../redux/selectors";
+import { useAuth } from "../../hooks/useAuth";
+import { selectUserName, useAppSelector } from "../../redux/selectors";
+import sprite from "../../images/svg/sprite.svg";
 
 export const SidebarFooter = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

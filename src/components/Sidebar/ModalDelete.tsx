@@ -1,6 +1,6 @@
 import { Backdrop, Box, Button, Modal, useTheme } from "@mui/material";
-import sprite from "../images/svg/sprite.svg";
-import { ModalDeleteProps } from "./helpers/types";
+import { ModalDeleteProps } from "../helpers/types";
+import sprite from "../../images/svg/sprite.svg";
 
 export const ModalDelete: React.FC<ModalDeleteProps> = ({ isModal, setIsModal, name, handleDelete }) => {
     const theme: any = useTheme();

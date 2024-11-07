@@ -50,7 +50,9 @@ const router = createBrowserRouter([
     path: "*",
     element: <Navigate to="/feeds" replace />,
   },
-]);
+],
+  // { basename: "vacancy-browse", }
+);
 
 root.render(
   <React.StrictMode>
