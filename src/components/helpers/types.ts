@@ -137,3 +137,14 @@ export interface ModalDeleteProps {
 //chat
 
 export type IChatItemsArray = IChatItem[];
+
+export interface FetchMessagesProps {
+  id: string | undefined;
+  setMessages: (prev: any) => void;
+};
+
+export interface SocketProps {
+  id: string | undefined;
+  setMessages: (prev: any) => void;
+  setIsFetching: (prev: any) => void;
+};

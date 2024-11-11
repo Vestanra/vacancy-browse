@@ -6,6 +6,7 @@ import { ISubscriptionToChatMessagesDTO } from "../interfaces-submodule/interfac
 import { getAccessToken } from "../components/helpers/functions/getTokens";
 import { useEffect } from "react";
 import { IMessageDTO } from "../interfaces-submodule/interfaces/dto/message/imessage-dto";
+import { SocketProps } from "../components/helpers/types";
 
 const manager = new Manager(`${process.env.REACT_APP_BASE_URL}`, {
     transports: ["websocket"],
@@ -14,7 +15,7 @@ const manager = new Manager(`${process.env.REACT_APP_BASE_URL}`, {
 
 export const socketUrl = `${BaseRoutes.V1}/${MessagesRoutesEnum.BasePrefix}`;
 
-export const useSocket = ({ id, setMessages}: { id: string, setMessages: any}) => {
+export const useSocket = ({ id, setMessages, setIsFetching}: SocketProps) => {
     const accessToken = getAccessToken();
     const mySocket = manager.socket(socketUrl);
    
@@ -39,10 +40,8 @@ export const useSocket = ({ id, setMessages}: { id: string, setMessages: any}) =
         mySocket.on("connect", () => handleConnect(mySocket, requestBody));
         mySocket.on("disconnect", () => handleDisconnect(mySocket, requestBody));
         mySocket.on(NotificationEvents.ChatResponse, (message) => {
-            setMessages((prevMessages: IMessageDTO[]) => {
-                const isDuplicate = prevMessages.some((prevMessage) => prevMessage.id === message.id);
-                return isDuplicate ? prevMessages : [...prevMessages, message];
-            });
+            setMessages((prevMessages: IMessageDTO[]) => [...prevMessages, message]);
+            setIsFetching(false);           
         });
 
         return () => {
@@ -51,5 +50,5 @@ export const useSocket = ({ id, setMessages}: { id: string, setMessages: any}) =
                 mySocket.disconnect();
             }
         };
-    }, [id, accessToken, mySocket, setMessages]);
+    }, [id, accessToken, mySocket, setMessages, setIsFetching]);
 };
