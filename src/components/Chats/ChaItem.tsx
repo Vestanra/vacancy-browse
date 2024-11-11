@@ -26,7 +26,7 @@ export const ChatItem = () => {
         if (data) {
             setMessages(data)        
         }
-    }, [data, messages]);
+    }, [data]);
     
     useEffect(() => {
         if (chatListRef.current) {
