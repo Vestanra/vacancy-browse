@@ -23,7 +23,7 @@ export const useSendMessageQuery = () => {
     return useMutation({
         mutationFn: (params: ISendMessageRequest) => sendMessage(params),
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['messages',]})
+            queryClient.invalidateQueries({ queryKey: ['messages',] })
         }
     })
-}
+};

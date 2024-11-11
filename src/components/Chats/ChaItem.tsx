@@ -1,68 +1,44 @@
 import { useParams } from "react-router-dom"
-import { io, Socket } from "socket.io-client";
 import { useMessagesQuery, useSendMessageQuery } from "../../hooks/useMessagesQuery";
-import { getAccessToken } from "../helpers/functions/getTokens";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { handleConnect, handleDisconnect, socketUrl } from "../../services/socket";
+import { useEffect, useRef, useState } from "react";
+import { useSocket } from "../../hooks/useSocket";
 import { IMessageDTO } from "../../interfaces-submodule/interfaces/dto/message/imessage-dto";
 import { Loader } from "../Loader";
 import sprite from "../../images/svg/sprite.svg";
 import { useTheme } from "@emotion/react";
 import { Button, CustomTextarea, Form, FormWrap, Li, } from "../helpers/styles/ChatItem.styled";
-import { NotificationEvents } from "../../interfaces-submodule/enums/notification/notification-events.enum";
 
 export const ChatItem = () => {
-    const { id } = useParams<{ id: string }>();
+    const { id } = useParams<{ id: string } >();
     const [content, setContent] = useState<string>("");
     const [isFetching, setIsFetching] = useState<boolean>(false);
-    const [myMessage, setMyMessage] = useState<string>('')
+    const [myMessage, setMyMessage] = useState<string>('');
+    const [messages, setMessages] = useState<IMessageDTO[]>([]);
     
-    const { data, refetch, isLoading } = useMessagesQuery(id as string);
+    const { data, isLoading } = useMessagesQuery(id as string);
     const { mutate: sendMessage } = useSendMessageQuery();
 
-    const accessToken = getAccessToken();
     const theme: any = useTheme();
     const chatListRef = useRef<HTMLUListElement>(null);
-
-    const chatsData: IMessageDTO[] = useMemo(() => {
-        return data || []
-    }, [data]);
+    useSocket({ id: id || '', setMessages }); 
+    
+    useEffect(() => {
+        if (data) {
+            setMessages(data)        
+        }
+    }, [data, messages]);
     
     useEffect(() => {
         if (chatListRef.current) {
             chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
         }        
-    }, [chatsData, isFetching]);
+    }, [messages, isFetching]);
 
     useEffect(() => {
         setIsFetching(false);
         setMyMessage('');
-    },[chatsData])
-
-    useEffect(() => {
-        const socket: Socket = io(socketUrl, {
-            transports: ["websocket"],
-            timeout: 10000,
-        });
-
-        const requestBody = {
-            chatId: parseInt(id || '0'),
-            accessToken
-        };
-
-        socket.on('connect', () => handleConnect(socket, requestBody));
-        socket.on('disconnect', () => handleDisconnect(socket, requestBody));
-        socket.on(NotificationEvents.ChatResponse, () => {
-            refetch();
-        });
+    }, [messages]);   
         
-        return () => {
-            socket.disconnect();
-        };
-    }, [accessToken, id, refetch]);
-    
-    
-
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const chatId = parseInt(id || "0");
@@ -86,7 +62,7 @@ export const ChatItem = () => {
                 : <div style={{ display: "flex", flexDirection: "column", height: "100vh", }}>
                     <ul className="custom-scrollbar" ref={chatListRef}
                         style={{ width: "800px", margin: "0 auto", flex: "1", overflowY: "auto" }}>
-                        {chatsData.length > 0 && chatsData.map((el) => (
+                        {messages.length > 0 && messages.map((el) => (
                             el.isBot
                                 ? <Li key={el.id} style={{backgroundColor: theme.palette.gray.G200}}>
                                     <svg width={24} height={24} style={{ color: theme.palette.primary.contrastText, flexShrink: "0" }}><use href={`${sprite}#subtract`} /></svg>
