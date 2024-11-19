@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from "react"
-import { TitleSelectProps } from "../helpers/types"
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
 import { debounce } from 'lodash';
 import { useTheme } from "@emotion/react";
+import { TitleSelectProps } from "../../types/types";
 
 
 export const TitleSelect: React.FC<TitleSelectProps> =

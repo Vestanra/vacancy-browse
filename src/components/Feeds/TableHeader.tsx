@@ -1,8 +1,8 @@
 import { useTheme } from "@emotion/react";
 import sprite from "../../images/svg/sprite.svg";
-import { TableHeaderProps } from "../helpers/types";
 import { defaultParams } from "../helpers/defultValue/defaultParamas";
 import { Box, Button } from "@mui/material";
+import { TableHeaderProps } from "../../types/types";
 
 export const TableHeader: React.FC<TableHeaderProps> = ({setParams, setSelectedTitle}) => {
     const theme: any = useTheme(); 

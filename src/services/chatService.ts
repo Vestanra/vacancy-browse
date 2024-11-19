@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getAccessToken } from "../components/helpers/functions/getTokens";
 import { BaseRoutes } from "../interfaces-submodule/enums/routes/base-routes.enum";
-import { IChatItemsArray } from "../components/helpers/types";
 import { ICreateChatRequest } from "../interfaces-submodule/interfaces/dto/chat/dto/icreate-chat-request.interface";
 import { ChatRoutes } from "../interfaces-submodule/enums/routes/chat-routes.enum";
+import { IChatItemsArray } from "../types/types";
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,

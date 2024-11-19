@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import '../helpers/styles/datePickerStyle.css';
-import { DataSelectProps } from "../helpers/types";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
+import { DataSelectProps } from "../../types/types";
 
 export const DateSelect: React.FC<DataSelectProps> =
     ({ setParams, setSelectedScore, setSelectedKeyWords, setSelectedTitle, setSelectedReview, setCurrentPage }) => {

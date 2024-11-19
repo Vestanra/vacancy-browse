@@ -1,42 +1,10 @@
-import { createTheme, CssBaseline, PaletteOptions } from "@mui/material";
+import { createTheme, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import frameLight from "../../../images/png/frame-light.png";
 import frameDark from "../../../images/png/frame-dark.png";
-
-export interface CustomPaletteOptions extends PaletteOptions {
-  blue?: {
-      B100?: string;
-      BA300?: string;
-  },
-  
-  gray?: {
-    G100?: string;
-    G300?: string;
-    G200?: string;
-    G400?: string;
-    G600?: string;
-    G700?: string;
-    G800?: string;
-  },
-  alertError?: {
-    E200?: string;
-    E600?: string;
-  };
-  alertWarning?: {
-    E200?: string;
-    E600?: string;
-  };
-  alertInfo?: {
-    E200?: string;
-    E600?: string;
-  };
-  alertSuccess?: {
-    E200?: string;
-    E600?: string;
-  };
-};
+import { CustomPaletteOptions } from "../../../types/types";
 
 const ThemeContext = createContext({
   toggleTheme: () => { },

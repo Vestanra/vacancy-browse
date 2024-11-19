@@ -62,7 +62,7 @@ export const Sidebar = () => {
     const handleNewChatName = () => {
         const newName = getValues("chatName");
 
-        if (!id || !newName || newName.trim() === "" || newName === data?.find((el) => el.id === id)?.name) {
+        if (!id || !newName || newName.trim() === "" || newName === data?.find((el: any) => el.id === id)?.name) {
             closePopover();
             return;
         };
@@ -91,7 +91,7 @@ export const Sidebar = () => {
             </Button>
             <ul>
                 {data &&
-                    data.map(el => <li key={el.id}
+                    data.map((el: any) => <li key={el.id}
                         style={{
                             position: 'relative',
                             display: "flex", justifyContent: "space-between",

@@ -2,7 +2,7 @@ import { ICreateChatRequest } from "../interfaces-submodule/interfaces/dto/chat/
 import { refreshUser } from "../redux/operationsAuth";
 import { useAppDispatch } from "../redux/store";
 import { createNewChat, deleteChatById, getChatById, getChats, updateChatById } from "../services/chatService";
-import { IChatItemsArray } from "../components/helpers/types";
+import { IChatItemsArray } from "../types/types";
 
 export const useChats = () => {
     const dispatch = useAppDispatch();

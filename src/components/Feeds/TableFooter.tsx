@@ -1,8 +1,8 @@
 import { Box, Pagination } from "@mui/material";
-import { TableFooterProps } from "../helpers/types"
 import { SelectedItemsPerPage } from "./SelectedItemsPerPage";
 import { useTheme } from "@emotion/react";
 import { getFormatedItemsShown } from "../helpers/functions";
+import { TableFooterProps } from "../../types/types";
 
 export const TableFooter: React.FC<TableFooterProps> = ({ data, selectedItemsPerPage, setSelectedItemsPerPage, setParams, currentPage, setCurrentPage }) => {
     const theme: any = useTheme();

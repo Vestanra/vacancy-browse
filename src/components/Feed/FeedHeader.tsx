@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import { Box, Button } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
-import { FeedHeaderProps } from "../helpers/types";
+import { FeedHeaderProps } from "../../types/types";
 
 export const FeedHeader: React.FC<FeedHeaderProps> = ({ handleClick, title, matchedCases, matchedBlogs }) => {
     const theme: any = useTheme();

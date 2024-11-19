@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../redux/store";
 import { getMessages } from "../services/messageService";
 import { refreshUser } from "../redux/operationsAuth";
-import { FetchMessagesProps } from "../components/helpers/types";
+import { FetchMessagesProps } from "../types/types";
 
 export const useFetchMessages = ({ id, setMessages}: FetchMessagesProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

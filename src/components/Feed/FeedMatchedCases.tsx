@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Box } from "@mui/material";
 import { getFormattedDate } from "../helpers/functions";
 import sprite from "../../images/svg/sprite.svg";
-import { FeedInfoProps } from "../helpers/types";
+import { FeedInfoProps } from "../../types/types";
 
 const key = ['Published', 'Platforms', 'Devices', 'Tech stack', 'Scope of work'];
 

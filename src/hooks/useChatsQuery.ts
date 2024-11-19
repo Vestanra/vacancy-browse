@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient, UseQueryResult } from "@tanstack/react-query";
 import { selectIsAuth, useAppSelector } from "../redux/selectors";
-import { IChatItemsArray } from "../components/helpers/types";
 import { useChats } from "./useChats";
 import { ICreateChatRequest } from "../interfaces-submodule/interfaces/dto/chat/dto/icreate-chat-request.interface";
 import { useNavigate } from "react-router-dom";
+import { IChatItemsArray } from "../types/types";
 
 export const useChatsQuery = () => {
     const { getAllChats } = useChats();

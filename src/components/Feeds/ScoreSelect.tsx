@@ -1,10 +1,10 @@
 import Select, { GroupBase, components  } from "react-select";
-import { KeywordOption, ScoreSelectProps } from "../helpers/types";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
 import { getDisplayValue, getFormattedKeywords } from "../helpers/functions";
+import { KeywordOption, ScoreSelectProps } from "../../types/types";
 
 const initialValue = ["0 - 19", "20 - 39", "40 - 59", "60 - 79", "80 - 100"];
 

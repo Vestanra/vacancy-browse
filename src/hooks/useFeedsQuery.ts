@@ -2,9 +2,9 @@ import { useMutation, useQuery, useQueryClient, UseQueryResult } from "@tanstack
 import { IUpworkResponseListFeedsDto } from "../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
 import { useFeeds } from "./useFeeds";
 import { selectIsAuth, useAppSelector } from "../redux/selectors";
-import { FeedsParams } from "../components/helpers/types";
 import { defaultParams } from "../components/helpers/defultValue/defaultParamas";
 import { IUpworkFeedDetailItemDTO } from "../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-feed-detail-item.dto";
+import { FeedsParams } from "../types/types";
 
 export const useFeedsData = (params: FeedsParams = {}) => {
     const { getAllFeeds } = useFeeds();

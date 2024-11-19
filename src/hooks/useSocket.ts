@@ -5,8 +5,7 @@ import { MessagesRoutesEnum } from "../interfaces-submodule/enums/routes/message
 import { ISubscriptionToChatMessagesDTO } from "../interfaces-submodule/interfaces/dto/message/isubscription-to-chat-messages.dto";
 import { getAccessToken } from "../components/helpers/functions/getTokens";
 import { useEffect } from "react";
-import { IMessageDTO } from "../interfaces-submodule/interfaces/dto/message/imessage-dto";
-import { SocketProps } from "../components/helpers/types";
+import { SocketProps } from "../types/types";
 
 const manager = new Manager(`${process.env.REACT_APP_BASE_URL}`, {
     transports: ["websocket"],
@@ -40,7 +39,7 @@ export const useSocket = ({ id, setMessages, setIsFetching}: SocketProps) => {
         mySocket.on("connect", () => handleConnect(mySocket, requestBody));
         mySocket.on("disconnect", () => handleDisconnect(mySocket, requestBody));
         mySocket.on(NotificationEvents.ChatResponse, (message) => {
-            setMessages((prevMessages: IMessageDTO[]) => [...prevMessages, message]);
+            setMessages((prev: any) => [...prev, message]);
             setIsFetching(false);           
         });
 

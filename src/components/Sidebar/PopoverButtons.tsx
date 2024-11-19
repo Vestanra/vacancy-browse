@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { PopoverButtonsProps } from "../helpers/types";
 import sprite from "../../images/svg/sprite.svg";
+import { PopoverButtonsProps } from "../../types/types";
 
 export const PopoverButtons: React.FC<PopoverButtonsProps> = ({setIsRenameAction, id, handleOpenModal }) => {
     const theme: any = useTheme();

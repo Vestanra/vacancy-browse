@@ -1,10 +1,10 @@
 import Select, { GroupBase, components  } from "react-select";
-import { KeywordOption, ReviewSelectProps, } from "../helpers/types";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
 import { getDisplayValue, getFormattedKeywords } from "../helpers/functions";
+import { KeywordOption, ReviewSelectProps } from "../../types/types";
 
 export const ReviewSelect: React.FC<ReviewSelectProps> = ({ setParams, setSelectedScore, setSelectedKeyWords, setSelectedTitle, selectedReview, setSelectedReview, setCurrentPage }) => {
 

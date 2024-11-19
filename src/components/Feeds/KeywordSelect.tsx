@@ -1,12 +1,12 @@
 import Select, { GroupBase, components  } from "react-select";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
-import { KeywordOption, KeywordSelectProps } from "../helpers/types";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import "../helpers/styles/overflow.css"
 import { getDisplayValue, getFormattedKeywords, getUniqueKeywords } from "../helpers/functions";
+import { KeywordOption, KeywordSelectProps } from "../../types/types";
 
 export const KeywordSelect: React.FC<KeywordSelectProps> =
     ({ setParams, feedsData, selected: selectedKeyWords, setSelected: setSelectedKeyWords, setSelectedScore, setSelectedTitle, setSelectedReview, setCurrentPage }) => {
