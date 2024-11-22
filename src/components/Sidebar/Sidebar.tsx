@@ -107,6 +107,7 @@ export const Sidebar = () => {
                                 width: "222px",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
+                                whiteSpace: "nowrap", 
                             }}
                         >{el.name}</div>
                         <button
