@@ -4,7 +4,6 @@ import { debounce } from 'lodash';
 import { useTheme } from "@emotion/react";
 import { TitleSelectProps } from "../../types/types";
 
-
 export const TitleSelect: React.FC<TitleSelectProps> =
     ({ setParams, setSelectedScore, setSelectedKeyWords, selectTitle, setSelectedTitle, setSelectedReview, setCurrentPage }) => {
         const [inputValue, setInputValue] = useState<string>(selectTitle);

@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { DateSelect } from "./DateSelect";
 import { KeywordSelect } from "./KeywordSelect";
 import { ScoreSelect } from "./ScoreSelect";
-import { TitleSelect } from "./TitleSlect";
+import { TitleSelect } from "./TitleSelect";
 import { SelectDirection } from "./SelectDirection";
 import { UpworkFeedSortBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-sort-by.enum";
 import { TableHeader } from "./TableHeader";

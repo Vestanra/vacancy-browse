@@ -29,6 +29,12 @@ export const ChatItem = () => {
             chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
         }
     }, [messages, isFetching]);
+
+    useEffect(() => {
+        return () => {
+            setIsFetching(false);
+        };
+    }, [id]);
         
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();

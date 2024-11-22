@@ -39,8 +39,10 @@ export const useSocket = ({ id, setMessages, setIsFetching}: SocketProps) => {
         mySocket.on("connect", () => handleConnect(mySocket, requestBody));
         mySocket.on("disconnect", () => handleDisconnect(mySocket, requestBody));
         mySocket.on(NotificationEvents.ChatResponse, (message) => {
-            setMessages((prev: any) => [...prev, message]);
-            setIsFetching(false);           
+            if (message.chatId === parseInt(id || '0')) {
+                setMessages((prev: any) => [...prev, message]);
+                setIsFetching(false);
+            }
         });
 
         return () => {
