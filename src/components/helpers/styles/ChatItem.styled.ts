@@ -31,7 +31,7 @@ export const Li = styled.li`
   display: flex;
   width: 100%;
   gap: 12px;
-  align-items: center;
+  align-items: left;
   border-radius: 8px;
 `
 

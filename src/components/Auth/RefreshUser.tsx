@@ -23,8 +23,8 @@ export const RefreshUser = ({ children }: { children: JSX.Element }) => {
             }            
         }
         refresh()
-       
-    }, [accessToken, dispatch]);
 
+    }, [accessToken, dispatch]);
+    
     return isRefreshing ? <Loader/> : children;
 }
