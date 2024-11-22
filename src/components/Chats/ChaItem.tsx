@@ -33,6 +33,7 @@ export const ChatItem = () => {
     useEffect(() => {
         return () => {
             setIsFetching(false);
+            setContent('');
         };
     }, [id]);
         
@@ -100,9 +101,9 @@ export const ChatItem = () => {
                             <Button
                                 onClick={(e) => handleClick(e)}
                                 disabled={isFetching}
-                                style={{ backgroundColor: content ? theme.palette.primary.contrastText : "transparent" }}
+                                style={{ backgroundColor: content && !isFetching ? theme.palette.primary.contrastText : "transparent" }}
                             >
-                                <svg width={20} height={20} color={content ? theme.palette.primary.main : theme.palette.gray.G800}><use href={`${sprite}#chat-send`} /></svg>
+                                <svg width={20} height={20} color={content && !isFetching ? theme.palette.primary.main : theme.palette.gray.G800}><use href={`${sprite}#chat-send`} /></svg>
                             </Button>
                         </Form>
                     </FormWrap>

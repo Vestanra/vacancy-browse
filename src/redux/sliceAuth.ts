@@ -27,7 +27,7 @@ const initialState: AuthState = {
     loginData: userData,
     isAuth: false,
     loading: false,
-    isRefreshing: true,
+    isRefreshing: false,
     error: null,
 };
 

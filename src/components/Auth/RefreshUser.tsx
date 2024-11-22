@@ -3,13 +3,17 @@ import { selectIsRefreshing, useAppSelector } from "../../redux/selectors";
 import { useAppDispatch } from "../../redux/store";
 import { recoverUser, refreshUser } from "../../redux/operationsAuth";
 import { Loader } from "../Loader";
+import { getAccessToken } from "../helpers/functions/getTokens";
 
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
     const isRefreshing = useAppSelector(selectIsRefreshing);
     const dispatch = useAppDispatch();
+    const accessToken = getAccessToken();
 
-    useEffect(() => {
-        const refresh = async () => {
+    useEffect(() => {             
+        if (!accessToken) return;   
+        
+        const refresh = async () => {            
             try {
                 await dispatch(recoverUser());
             } catch (err: any) {
@@ -19,7 +23,8 @@ export const RefreshUser = ({ children }: { children: JSX.Element }) => {
             }            
         }
         refresh()
-    }, [dispatch]);
+       
+    }, [accessToken, dispatch]);
 
     return isRefreshing ? <Loader/> : children;
 }
