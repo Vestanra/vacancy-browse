@@ -9,7 +9,7 @@ export const FeedHeader: React.FC<FeedHeaderProps> = ({ handleClick, title, matc
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 32px" }}>
             <div>
-                <NavLink to={'/feeds'}
+                <NavLink to={'/'}
                     style={{ color: theme.palette.primary.contrastText, textDecoration: "none", }}>Upwork feed
                     <span style={{ color: theme.palette.gray.G700 }}> &gt;</span>
                 </NavLink>

@@ -11,7 +11,7 @@ export const SidebarFooter = () => {
     const theme: any = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
-    const isFeedsPage = location.pathname === '/feeds';
+    const isFeedsPage = location.pathname === '/';
 
     const { logout } = useAuth();
 
@@ -36,7 +36,7 @@ export const SidebarFooter = () => {
             }}>
             <Button
                 component="button"
-                onClick={() => navigate('/feeds')}
+                onClick={() => navigate('/')}
                 sx={{
                     display: "flex",
                     alignItems: "center",

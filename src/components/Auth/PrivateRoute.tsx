@@ -1,8 +1,10 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { selectIsAuth, useAppSelector } from "../../redux/selectors";
 
 export const PrivateRoute = ({ children }: { children: JSX.Element }) => {
     const isAuth = useAppSelector(selectIsAuth);
+    const location = useLocation();
+    console.log(location)
     
-    return isAuth ? children : <Navigate to="/login" replace/>
+    return isAuth ? children : <Navigate to="/login"  state={{ from: location }} replace/>
 }

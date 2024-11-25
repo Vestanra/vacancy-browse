@@ -30,14 +30,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/feeds" replace />
-      },
-      {
-        path: "feeds",
         element: <PrivateRoute children={<HomePage />} />
       },
       {
-        path: "feeds/:id",
+        path: "/feeds/:id",
         element: <PrivateRoute children={<FeedPage />} />
       },
       {
@@ -48,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Navigate to="/feeds" replace />,
+    element: <Navigate to="/" replace />,
   },
 ],
   // { basename: "vacancy-browse", }
