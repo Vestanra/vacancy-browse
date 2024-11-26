@@ -22,6 +22,8 @@ export const TableFooter: React.FC<TableFooterProps> = ({ data, selectedItemsPer
             justifyContent: "space-between",
             textAlign: "center",
             padding: "8px",
+            width: "1056px",
+            height: "64px",
             position: 'fixed',
             bottom: 0, 
             borderTop: `1px solid ${theme.palette.gray.G400}`,

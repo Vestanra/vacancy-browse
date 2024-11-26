@@ -261,7 +261,7 @@ export const TableFeeds = () => {
         <>
             {isLoading
                 ? <Loader />
-                : <Box sx={{ width: "1120px", padding: '8px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center" }} >
+                : <Box sx={{ width: "1120px", padding: '8px 32px 64px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center", position: "relative" }} >
                     <TableHeader
                         setParams={setParams}
                         setSelectedTitle={setSelectedTitle}
