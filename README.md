@@ -35,3 +35,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - Email: stetsiuk.v@abcloudz.com; 
 - Password: o1XyWv3HqEhffF2
+
+*You can access the live version of the application here:*
+
+👉 [Live Demo](https://vestanra.github.io/vacancy-browse/)
