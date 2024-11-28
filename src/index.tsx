@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     element: <Navigate to="/" replace />,
   },
 ],
-  // { basename: "vacancy-browse", }
+  { basename: "/vacancy-browse", }
 );
 
 root.render(
