@@ -1,42 +1,10 @@
-import { createTheme, CssBaseline, PaletteOptions } from "@mui/material";
-import { border, ThemeProvider } from "@mui/system";
+import { createTheme, CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/system";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import frameLight from "../../../images/png/frame-light.png";
 import frameDark from "../../../images/png/frame-dark.png";
-
-export interface CustomPaletteOptions extends PaletteOptions {
-  blue?: {
-      B100?: string;
-      BA300?: string;
-  },
-  
-  gray?: {
-    G100?: string;
-    G300?: string;
-    G200?: string;
-    G400?: string;
-    G600?: string;
-    G700?: string;
-    G800?: string;
-  },
-  alertError?: {
-    E200?: string;
-    E600?: string;
-  };
-  alertWarning?: {
-    E200?: string;
-    E600?: string;
-  };
-  alertInfo?: {
-    E200?: string;
-    E600?: string;
-  };
-  alertSuccess?: {
-    E200?: string;
-    E600?: string;
-  };
-};
+import { CustomPaletteOptions } from "../../../types/types";
 
 const ThemeContext = createContext({
   toggleTheme: () => { },
@@ -98,7 +66,7 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               E200: '#DCEDF5',
               E600: '#1F7099',
             },
-            backgroundImage: frameLight,               
+            backgroundImage: frameLight,
           }
           :
           {
@@ -137,39 +105,58 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               E200: '#2B373D',
               E600: '#52A3CC',
             },
-            backgroundImage: frameDark, 
+            backgroundImage: frameDark,
           }
         )
        
       } as CustomPaletteOptions,
-       components: {
-          MuiCssBaseline: {
-            styleOverrides: {
-              body: {
-                backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F', 
-                minHeight: '100vh', 
-              },
-              button: {
-                border: "none",
-                backgroundColor: "transparent",
-                cursor: "pointer",
-              }
+      components: {
+        MuiCssBaseline: {
+          styleOverrides: {
+            body: {
+              backgroundColor: themeMode === 'light' ? '#F6F7F8' : '#181A1F',
+              minHeight: '100vh',
             },
-         },
-         MuiButton: {
-                styleOverrides: {
-                  root: {
-                    textTransform: 'none',
-                    color: themeMode === 'light' ? '#252733' : '#EBECF0',
-                    border: `2px solid ${themeMode === 'light' ? '#ABBDE0' : '#3760AD'}`,
-                    borderRadius: '8px',
-                    '&:hover': { backgroundColor: themeMode === 'light' ? '#F0F5FF' : '#181B29FF', },
-                    height: '48px',
-                    textAlign: 'center',
-                    },
-                  },
+            button: {
+              border: "none",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+            },
+            ul: {
+              listStyleType: 'none',
+              padding: "0",
+              margin: "0",
+            },
+            input: {
+              '&:focus': {
+                outline: 'none',
               },
+            }
+          },
         },
+        MuiPopover: {
+          styleOverrides: {
+            paper: {
+              boxShadow: '0px 4px 16px -2px rgba(0, 0, 0, 0.06)',
+              border: `1px solid ${themeMode === 'light' ? '#D5D7DB' : '#414752'}`,
+              borderRadius: '12px',
+            },
+          },
+        },
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              textTransform: 'none',
+              color: themeMode === 'light' ? '#252733' : '#EBECF0',
+              border: `2px solid ${themeMode === 'light' ? '#ABBDE0' : '#3760AD'}`,
+              borderRadius: '8px',
+              '&:hover': { backgroundColor: themeMode === 'light' ? '#F0F5FF' : '#181B29FF', },
+              height: '48px',
+              textAlign: 'center',
+            },
+          },
+        },
+      },
       typography: {
         fontFamily: `'Poppins', sans-serif`,
       },

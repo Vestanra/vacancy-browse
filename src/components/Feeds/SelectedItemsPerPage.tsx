@@ -1,8 +1,8 @@
 import Select, { GroupBase, components } from "react-select"
-import { ItemsPerPageOption, SelectedItemsPerPageProps } from "../helpers/types"
 import { useTheme } from "@emotion/react";
 import sprite from "../../images/svg/sprite.svg";
 import { optionsItemsPerPage } from "../helpers/defultValue/defaultParamas";
+import { ItemsPerPageOption, SelectedItemsPerPageProps } from "../../types/types";
 
 export const SelectedItemsPerPage: React.FC<SelectedItemsPerPageProps> = ({ selectedItemsPerPage, setSelectedItemsPerPage, setParams }) => {
     const theme: any = useTheme();    
@@ -58,7 +58,7 @@ export const SelectedItemsPerPage: React.FC<SelectedItemsPerPageProps> = ({ sele
             }}
             onChange={(value) => {
                 const pageSize = value?.value;
-                setSelectedItemsPerPage(pageSize);
+                if(pageSize) setSelectedItemsPerPage(pageSize);                
                 setParams((prev: any) => ({
                     ...prev,
                     pageSize,

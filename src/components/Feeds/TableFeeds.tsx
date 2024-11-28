@@ -1,11 +1,11 @@
-import { useFeedsData } from "../hooks/useFeedsQuery";
+import { useFeedsData } from "../../hooks/useFeedsQuery";
 import { IUpworkFeedItemDTO } from "../../interfaces-submodule/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { DateSelect } from "./DateSelect";
 import { KeywordSelect } from "./KeywordSelect";
 import { ScoreSelect } from "./ScoreSelect";
-import { TitleSelect } from "./TitleSlect";
+import { TitleSelect } from "./TitleSelect";
 import { SelectDirection } from "./SelectDirection";
 import { UpworkFeedSortBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-sort-by.enum";
 import { TableHeader } from "./TableHeader";
@@ -261,7 +261,7 @@ export const TableFeeds = () => {
         <>
             {isLoading
                 ? <Loader />
-                : <Box sx={{ width: "1120px", padding: '8px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center" }} >
+                : <Box sx={{ width: "1120px", padding: '8px 32px 64px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center", position: "relative" }} >
                     <TableHeader
                         setParams={setParams}
                         setSelectedTitle={setSelectedTitle}

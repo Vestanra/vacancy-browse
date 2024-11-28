@@ -26,31 +26,29 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
+    element: <PrivateRoute children={<Layout />} />,
     children: [
       {
         index: true,
-        element: <Navigate to="/feeds" replace />
-      },
-      {
-        path: "feeds",
         element: <PrivateRoute children={<HomePage />} />
       },
       {
-        path: "feeds/:id",
+        path: "/feeds/:id",
         element: <PrivateRoute children={<FeedPage />} />
       },
       {
-        path: "feeds/chat",
+        path: "chats/:id",
         element: <PrivateRoute children={<ChatPage />} />
       },
     ]
   },
   {
     path: "*",
-    element: <Navigate to="/feeds" replace />,
+    element: <Navigate to="/" replace />,
   },
-]);
+],
+  // { basename: "vacancy-browse", }
+);
 
 root.render(
   <React.StrictMode>

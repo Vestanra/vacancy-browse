@@ -1,11 +1,14 @@
-import { Navigate } from "react-router-dom";
-import { selectUserData, useAppSelector } from "../redux/selectors";
+import { Navigate, useLocation } from "react-router-dom";
+import { selectIsAuth, useAppSelector } from "../redux/selectors";
 import { Login } from "../components/Auth/Login";
 
 export const LogInPade = () => {
-    const { email } = useAppSelector(selectUserData);
-    if (email) {
-        return <Navigate to={"/feeds"} replace/>
+    const location = useLocation();
+    const path = location.state?.from?.pathname || '/';
+    const isAuth = useAppSelector(selectIsAuth);
+
+    if (isAuth) {
+        return <Navigate to={path} replace/>
     }
     
     return (

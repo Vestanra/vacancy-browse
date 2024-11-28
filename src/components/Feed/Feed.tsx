@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFeedByIdQuery } from "../hooks/useFeedByIdQuery";
+import { useFeedByIdQuery } from "../../hooks/useFeedsQuery";
 import { FeedHeader } from "./FeedHeader";
 import { FeedSection } from "./FeedSection";
 import { FeedInfo } from "./FeedInfo";
@@ -8,7 +8,7 @@ import { FeedMatchedCases } from "./FeedMatchedCases";
 import { FeedMatchedBlogs } from "./FeedMatchedBlogs";
 import { Loader } from "../Loader";
 import { useState } from "react";
-import { useUpdateFeedQuery } from "../hooks/useUpdateFeedQuery";
+import { useUpdateFeedQuery } from "../../hooks/useFeedsQuery";
 
 export const FeedById = () => {
     const { id } = useParams<{ id: string }>();
@@ -16,8 +16,8 @@ export const FeedById = () => {
     
     const { data, isLoading, } = useFeedByIdQuery(id as string);
     const [matchedBlogs, setMatchedBlogs] = useState([]);
-    const [matchedCases, setMatchedCases] = useState([]);
-
+    const [matchedCases, setMatchedCases] = useState([]);    
+    
     const handleClick = () => {
         if (matchedBlogs.length === 0 && matchedCases.length === 0) return;
         
@@ -44,6 +44,8 @@ export const FeedById = () => {
                     <FeedHeader
                         handleClick={handleClick}
                         title={data?.title}
+                        matchedCases={matchedCases}
+                        matchedBlogs={matchedBlogs}
                     />
                     <div>
                         <FeedSection title={"Project info"}>

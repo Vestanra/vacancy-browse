@@ -1,9 +1,8 @@
 import { useState, useMemo, useEffect } from "react"
-import { TitleSelectProps } from "../helpers/types"
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
 import { debounce } from 'lodash';
 import { useTheme } from "@emotion/react";
-
+import { TitleSelectProps } from "../../types/types";
 
 export const TitleSelect: React.FC<TitleSelectProps> =
     ({ setParams, setSelectedScore, setSelectedKeyWords, selectTitle, setSelectedTitle, setSelectedReview, setCurrentPage }) => {
@@ -28,7 +27,6 @@ export const TitleSelect: React.FC<TitleSelectProps> =
                             }
                         ],
                     }));
-                    console.log(`Final value: ${value}`);
                 }, 1000),
             [setCurrentPage, setParams, setSelectedKeyWords, setSelectedReview, setSelectedScore, setSelectedTitle]
         );

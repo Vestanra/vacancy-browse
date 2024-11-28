@@ -1,12 +1,12 @@
 import Select, { GroupBase, components  } from "react-select";
 import { UpworkFeedSearchBy } from "../../interfaces-submodule/enums/upwork-feed/upwork-feed-search-by.enum";
-import { KeywordOption, KeywordSelectProps } from "../helpers/types";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import sprite from "../../images/svg/sprite.svg";
 import "../helpers/styles/overflow.css"
 import { getDisplayValue, getFormattedKeywords, getUniqueKeywords } from "../helpers/functions";
+import { KeywordOption, KeywordSelectProps } from "../../types/types";
 
 export const KeywordSelect: React.FC<KeywordSelectProps> =
     ({ setParams, feedsData, selected: selectedKeyWords, setSelected: setSelectedKeyWords, setSelectedScore, setSelectedTitle, setSelectedReview, setCurrentPage }) => {
@@ -68,13 +68,13 @@ export const KeywordSelect: React.FC<KeywordSelectProps> =
 
             let content;
             if (notAllSelect) {
-                content = <svg width={20} height={20}><use href={`${sprite}#not-select`} /></svg>
+                content = <svg width={20} height={20} style={{flexShrink: "0"}}><use href={`${sprite}#not-select`} /></svg>
             } else {
-                content = <Box sx={{ width: "20px", height: "20px", border: `2px solid ${theme.palette.gray.G400}`, borderRadius: "2px" }}></Box>
+                content = <Box sx={{ width: "20px", height: "20px", border: `2px solid ${theme.palette.gray.G400}`, borderRadius: "2px", flexShrink: "0" }}></Box>
             }
 
             if (isSelected) {
-                content = <svg width={20} height={20}><use href={`${sprite}#is-select`} /></svg>
+                content = <svg width={20} height={20} style={{flexShrink: "0"}}><use href={`${sprite}#is-select`} /></svg>
             }
 
             return (

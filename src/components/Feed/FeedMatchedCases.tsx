@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Box } from "@mui/material";
 import { getFormattedDate } from "../helpers/functions";
 import sprite from "../../images/svg/sprite.svg";
-import { FeedInfoProps } from "../helpers/types";
+import { FeedInfoProps } from "../../types/types";
 
 const key = ['Published', 'Platforms', 'Devices', 'Tech stack', 'Scope of work'];
 
@@ -20,7 +20,7 @@ export const FeedMatchedCases: React.FC<FeedInfoProps> = ({ data, matchedItem, s
     };
 
     return (
-        <ul style={{ listStyleType: 'none', padding: "0 0 8px 0", margin: "0", fontSize: "14px", }}>
+        <ul style={{ fontSize: "14px", }}>
             {data
                 && data.map((el: any) => (
                     <li key={el.docId} style={{
