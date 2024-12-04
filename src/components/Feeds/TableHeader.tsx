@@ -4,11 +4,14 @@ import { defaultParams } from "../helpers/defultValue/defaultParamas";
 import { Box, Button } from "@mui/material";
 import { TableHeaderProps } from "../../types/types";
 
-export const TableHeader: React.FC<TableHeaderProps> = ({setParams, setSelectedTitle}) => {
+export const TableHeader: React.FC<TableHeaderProps> = ({setParams, setSelectedTitle, setSelectedKeyWords, setSelectedScore, setSelectedReview}) => {
     const theme: any = useTheme(); 
     const handleClick = () => {
         setParams(defaultParams)
-        setSelectedTitle('')
+        setSelectedTitle('');
+        setSelectedKeyWords([]);
+        setSelectedScore([]);
+        setSelectedReview([]);
     }
     return (
         <Box sx={{display: 'flex', gap: '8px', alignItems: 'center', }}>

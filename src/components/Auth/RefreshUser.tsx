@@ -26,5 +26,5 @@ export const RefreshUser = ({ children }: { children: JSX.Element }) => {
 
     }, [accessToken, dispatch]);
     
-    return isRefreshing ? <Loader/> : children;
+    return isRefreshing ? <div style={{padding: "20px"}}> Loading...</div> : children;
 }

@@ -59,7 +59,7 @@ root.render(
             <RouterProvider router={router} />
           </ThemeContextProvider>
         </RefreshUser>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>

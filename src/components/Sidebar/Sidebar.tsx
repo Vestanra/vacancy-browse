@@ -77,7 +77,7 @@ export const Sidebar = () => {
             display: "flex", gap: "2px",
             alignItems: "center",
             flexDirection: "column",
-            width: "320px", minHeight: "100vh", height: "auto",
+            width: "320px", minHeight: "100vh",
             position: "relative",
             padding: "12px 16px",
             backgroundColor: theme.palette.primary.main,

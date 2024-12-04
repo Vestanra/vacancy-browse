@@ -32,7 +32,7 @@ export const TableFeeds = () => {
     const { themeMode } = useThemeContext();
     const navigate = useNavigate();
     
-    const { data, isLoading } = useFeedsData(params);       
+    const { data, isLoading } = useFeedsData(params);
     const feedsData: IUpworkFeedItemDTO[] = useMemo(() => {
         return data?.items?.items || []
     }, [data]);
@@ -41,7 +41,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "title",
             header: () => (
-                <Box sx={{ width: "208px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
+                <Box sx={{ minWidth: "208px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                         <span>Title</span>
                         <SelectDirection
@@ -62,7 +62,7 @@ export const TableFeeds = () => {
             ),
             cell: ({ row }) => {
                 return (
-                    <div style={{ width: "208px", padding: '8px', }}>
+                    <div style={{ minWidth: "208px", padding: '8px', }}>
                         <a href={row.original?.url} target="_blank" rel="noopener noreferrer"
                             style={{
                                 color: theme.palette.primary.contrastText,
@@ -78,7 +78,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "published",
             header: () => (
-                <Box sx={{ width: "140px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}
+                <Box sx={{ minWidth: "140px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}
                     className={`custom-calendar ${themeMode === 'light' ? 'light' : 'dark'}`}>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                         <span>Published</span>
@@ -109,7 +109,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "keywords",
             header: () => (
-                <Box sx={{ width: "208px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
+                <Box sx={{ minWidth: "208px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
                     <span>Keywords</span>
                     <KeywordSelect
                         setParams={setParams}
@@ -126,7 +126,7 @@ export const TableFeeds = () => {
             cell: ({ row }) => {
                 const keywords = row.original?.keywords;
                 return (
-                    <Box sx={{ display: "flex", flexWrap: "wrap", width: "208px", padding: '8px' }}>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", minWidth: "208px", padding: '8px' }}>
                         {keywords && keywords.map((keyword, index) => (
                             <Box
                                 key={index}
@@ -148,7 +148,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "score",
             header: () => (
-                <Box sx={{ width: "140px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
+                <Box sx={{ minWidth: "140px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                         <span>Score</span>
                         <SelectDirection
@@ -193,7 +193,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "review",
             header: () => (
-                <Box sx={{ width: "140px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
+                <Box sx={{ minWidth: "140px", display: "flex", flexDirection: 'column', justifyContent: "space-between", height: '100%', padding: '8px' }}>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                         <span>Reaction</span>
                         <SelectDirection
@@ -215,7 +215,7 @@ export const TableFeeds = () => {
             cell: ({ row }) => {
                 const type = row.original?.review?.type;
                 return (
-                    <div style={{ padding: '8px', width: '140px', textAlign: 'center' }}>
+                    <div style={{ padding: '8px', minWidth: '140px', textAlign: 'center' }}>
                         {type === "Like" ? <svg width={20} height={20}><use href={`${sprite}#like`} /></svg> :
                             type === "Dislike" ? <svg width={20} height={20}><use href={`${sprite}#dislike`} /></svg> :
                                 null}
@@ -226,7 +226,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "matchedCases",
             header: () => (
-                <div style={{ width: '110px', textAlign: 'right', padding: '8px' }}>
+                <div style={{ width: '110px', height: "100%", textAlign: 'right', padding: '8px', }}>
                     Matched cases
                 </div>
             ),
@@ -239,7 +239,7 @@ export const TableFeeds = () => {
         {
             accessorKey: "matchedBlogs",
             header: () => (
-                <div style={{ width: '110px', textAlign: 'right', padding: '8px' }}>
+                <div style={{ width: '110px', height: "100%", textAlign: 'right', padding: '8px', }}>
                     Matched blogs
                 </div>
             ),
@@ -261,65 +261,76 @@ export const TableFeeds = () => {
         <>
             {isLoading
                 ? <Loader />
-                : <Box sx={{ width: "1120px", padding: '8px 32px 64px 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center", position: "relative" }} >
+                : <Box sx={{ width: "100%", padding: '8px 32px 0 32px', margin: '0 auto', display: "flex", flexDirection: "column", justifyContent: "center", position: "relative" }} >
                     <TableHeader
                         setParams={setParams}
                         setSelectedTitle={setSelectedTitle}
+                        setSelectedKeyWords={setSelectedKeyWords}
+                        setSelectedScore={setSelectedScore}
+                        setSelectedReview={setSelectedReview}
                     />
-                    <table style={{ borderCollapse: 'collapse', marginTop: '16px', }}>
-                        <thead>
-                            {table.getHeaderGroups().map(headerGroup => (
-                                <tr key={headerGroup.id}>
-                                    {headerGroup.headers.map(header => (
-                                        <th key={header.id}
+                    <div>
+                        <table style={{ borderCollapse: 'collapse', marginTop: '16px', width: "100%"}}>
+                            <thead>
+                                {table.getHeaderGroups().map(headerGroup => (
+                                    <tr key={headerGroup.id}>
+                                        {headerGroup.headers.map(header => (
+                                            <th key={header.id}
+                                                style={{
+                                                    height: "116px", padding: '0px',
+                                                    borderBottom: `1px solid ${theme.palette.gray.G400}`,
+                                                    color: theme.palette.gray.G700,
+                                                }}>
+                                                {flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </thead>
+                            <tbody>
+                                {table.getRowModel().rows.map((row, index) => {
+                                    return (
+                                        <tr
+                                            key={row.id}
+                                            onClick={() => navigate(`/feeds/${row.original.id}`)}
                                             style={{
-                                                height: "116px", padding: '0px',
-                                                borderBottom: `1px solid ${theme.palette.gray.G400}`, color: theme.palette.gray.G700
-                                            }}>
-                                            {flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
-                                        </th>
-                                    ))}
-                                </tr>
-                            ))}
-                        </thead>
-                        <tbody>
-                            {table.getRowModel().rows.map(row => (
-                                <tr
-                                    key={row.id}
-                                    onClick={() => navigate(`/feeds/${row.original.id}`)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    {row.getVisibleCells().map(cell => (
-                                        <td key={cell.id}
-                                            style={{
-                                                borderBottom: `1px solid ${theme.palette.gray.G400}`,
-                                                color: theme.palette.gray.G700, verticalAlign: 'top', padding: "0px", width: 'auto',
-                                            }}>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    {feedsData.length > 0
-                        ? <TableFooter
-                            data={data}
-                            selectedItemsPerPage={selectedItemsPerPage}
-                            setSelectedItemsPerPage={setSelectedItemsPerPage}
-                            setParams={setParams}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                        />
-                        : <div style={{ padding: "20px" }}>Nothing found for your request.</div>}
+                                                cursor: 'pointer',
+                                                borderBottom: index === table.getRowModel().rows.length - 1 ? "none" : `1px solid ${theme.palette.gray.G400}`,
+                                            }}
+                                        >
+                                            {row.getVisibleCells().map(cell => (
+                                                <td key={cell.id}
+                                                    style={{
+                                                        color: theme.palette.gray.G700,
+                                                        verticalAlign: 'top', padding: "0px", width: 'auto',
+                                                    }}>
+                                                    {flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )}
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                        {feedsData.length > 0
+                            ? <TableFooter
+                                data={data}
+                                selectedItemsPerPage={selectedItemsPerPage}
+                                setSelectedItemsPerPage={setSelectedItemsPerPage}
+                                setParams={setParams}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
+                            : <div style={{ padding: "20px" }}>Nothing found for your request.</div>}
+                    </div>
                 </Box>
             }
         </>
     )
-};            
+};

@@ -15,14 +15,17 @@ export const FeedHeader: React.FC<FeedHeaderProps> = ({ handleClick, title, matc
                 </NavLink>
                 <h1 style={{
                     fontSize: "24px", fontWeight: "500", margin: "0",
-                    maxWidth: "770px", color: theme.palette.gray.G800
+                    color: theme.palette.gray.G800
                 }}>{title}</h1>
             </div>
             <Button
                 component="button"
                 disabled={matchedBlogs.length === 0 && matchedCases.length === 0}
                 onClick={handleClick}
-                sx={{ width: '278px'}}
+                sx={{
+                    width: '278px',
+                    flexShrink: "0"
+                }}
             >
                 <svg width={24} height={24} color={matchedBlogs.length === 0 && matchedCases.length === 0 ? theme.palette.gray.G400 : theme.palette.gray.G800}><use href={`${sprite}#send`} /></svg>
                 <span style={{ fontSize: "16px", fontWeight: "500", marginLeft: "8px" }}>Save & Generate response</span>

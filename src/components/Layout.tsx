@@ -18,10 +18,10 @@ export const Layout: React.FC = () => {
     return (
         <div >
             {
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: theme.palette.gray.G100 }}>
-                    <Box sx={{ display: "flex", width: "1440px", }}>
+                <div style={{ display: "flex", height:"100%", maxWidth: "100vw", justifyContent: "center", alignItems: "center", backgroundColor: theme.palette.gray.G100 }}>
+                    <Box sx={{ display: "flex", width: "100%"}}>
                         {isSidebar && <Sidebar />}
-                        <div style={{ margin: "0 auto", width: "1120px" }}>
+                        <div style={{ margin: "0 auto", width: "100%" }}>
                             <Box sx={{ display: "flex", justifyContent: "space-between", padding: '24px 20px' }}>
                                 <button onClick={handleSideBar}>
                                     {isSidebar
