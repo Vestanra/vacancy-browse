@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { selectIsRefreshing, useAppSelector } from "../../redux/selectors";
 import { useAppDispatch } from "../../redux/store";
 import { recoverUser, refreshUser } from "../../redux/operationsAuth";
-import { Loader } from "../Loader";
 import { getAccessToken } from "../helpers/functions/getTokens";
 
 export const RefreshUser = ({ children }: { children: JSX.Element }) => {
