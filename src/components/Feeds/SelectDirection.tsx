@@ -13,7 +13,7 @@ export const SelectDirection: React.FC<SelectDirectionProps> = ({setParams, sort
     };
 
     return (
-        <div onClick={handleClick}>
+        <div onClick={handleClick} style={{cursor: "pointer"}}>
             <svg width={16} height={16} color={theme.palette.gray.G400}><use href={`${sprite}#sort-select`} /></svg>  
           </div>    
     )

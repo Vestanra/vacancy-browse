@@ -76,6 +76,9 @@ export interface SelectDirectionProps {
 export interface TableHeaderProps {
   setParams: (params: Partial<FeedsParams> | {}) => void;
   setSelectedTitle: (prev: string) => void;
+  setSelectedKeyWords: (prev: string[]) => void;
+  setSelectedScore: (prev: string[]) => void;
+  setSelectedReview: (prev: string[]) => void;
 };
 
 export interface ReviewSelectProps {

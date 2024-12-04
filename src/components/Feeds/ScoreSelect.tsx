@@ -16,6 +16,7 @@ export const ScoreSelect: React.FC<ScoreSelectProps> =
             control: (provided: any, state: any) => ({
                 ...provided,
                 height: '44px',
+                cursor: "pointer",
                 color: theme.palette.primary.dark,
                 backgroundColor: theme.palette.primary.main,
                 padding: "0",
