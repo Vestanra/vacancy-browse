@@ -47,7 +47,7 @@ export const TitleSelect: React.FC<TitleSelectProps> =
             <input
                 style={{
                     width: '100%', height: "44px", border: `2px solid ${theme.palette.gray.G400}`, borderRadius: '4px', padding: '10px', outline: 'none',
-                    backgroundColor: theme.palette.primary.main,
+                    backgroundColor: theme.palette.primary.main, color: theme.palette.primary.dark,
                 }}
                 type="text"
                 onFocus={(e) => e.target.style.borderColor =  theme.palette.primary.contrastText} 
